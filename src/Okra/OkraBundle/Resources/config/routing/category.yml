@@ -1,0 +1,30 @@
+category:
+    path:     /list/
+    defaults: { _controller: "OkraBundle:Category:index" }
+
+category_show:
+    path:     /{id}/show
+    defaults: { _controller: "OkraBundle:Category:show" }
+
+category_new:
+    path:     /new
+    defaults: { _controller: "OkraBundle:Category:new" }
+
+category_create:
+    path:     /create
+    defaults: { _controller: "OkraBundle:Category:create" }
+    requirements: { _method: post }
+
+category_edit:
+    path:     /locale/{locale}/{id}/edit
+    defaults: { _controller: "OkraBundle:Category:edit" }
+
+category_update:
+    path:     /locale/{locale}/{id}/update
+    defaults: { _controller: "OkraBundle:Category:update" }
+    requirements: { _method: post|put }
+
+category_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "OkraBundle:Category:delete" }
+    requirements: { _method: post|delete }

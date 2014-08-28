@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <style type="text/css">
+        body {
+          font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+          color: #333
+        }
+        </style>
+    </head>
+    <body>
+        <table width="100%">
+            <tr width="100%">
+                <td>
+                    <img src="{{ app.request.getSchemeAndHttpHost() ~ asset('bundles/okra/images/logo.jpg'|e) }}" alt=""/>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;
+                </td>
+                <td style="font-size: 15px;text-align: left;">
+                    {% trans %}Date{% endtrans %} :<br/> 
+                    {% trans %}Table number{% endtrans %} :<br/>
+                    {% trans %}Order number{% endtrans %} :<br/>
+                    {% trans %}Your user{% endtrans %} :<br/> 
+                </td>
+                <td style="font-size: 15px;text-align: right;">
+                    {{ "now"|date("d/m/Y") }}<br/>
+                    {{ order.idTable }}<br/>                     
+                    {% if order.idOrderManual %}
+                        {{ order.idOrderManual }}<br/>
+                    {% else %}
+                        {{ order.id }}<br/>
+                    {% endif %}                    
+                    {{ order.idUser.username }}                    
+                </td>
+            </tr>
+        </table>
+        <br/><br/>
+        <hr>
+        <br/><br/>
+        <table width="100%" style="border-collapse:collapse;">
+            <thead>
+                <tr width="100%">
+                    <th>
+                        {% trans %}Category Name{% endtrans %}
+                    </th>                    
+                    <th>
+                        {% trans %}Item Name{% endtrans %}
+                    </th>
+                    <th>
+                        {% trans %}Unit price{% endtrans %}
+                    </th>
+                    <th>
+                        {% trans %}Quantity{% endtrans %}
+                    </th>                  
+                    <th>
+                        {% trans %}Total{% endtrans %}
+                    </th>                    
+                </tr>
+                <tr width="100%">
+                    <th>
+                        &nbsp;
+                    </th>                    
+                    <th>
+                        &nbsp;
+                    </th>
+                    <th>
+                        &nbsp;
+                    </th>
+                    <th>
+                        &nbsp;
+                    </th>                  
+                    <th>
+                        &nbsp;
+                    </th>                    
+                </tr>                
+            </thead>
+            <tbody>
+                {% for orderitem in orderitems %}
+                    <tr>
+                        <td style="border-width:1px;border-style:solid;border-color:#333;">
+                            {{ orderitem.idItem.idCategory.name }}
+                        </td>                        
+                        <td style="border-width:1px;border-style:solid;border-color:#333;">
+                            {{ orderitem.idItem.name }}
+                        </td>
+                        <td style="border-width:1px;border-style:solid;border-color:#333;text-align: right;">
+                            {{ orderitem.price | craue_currency('EUR') }}
+                        </td>      
+                        <td style="border-width:1px;border-style:solid;border-color:#333;text-align: right;">
+                            {{ orderitem.quantity }}
+                        </td>    
+                        <td style="font-size: 20px;border-width:1px;border-style:solid;border-color:#333;text-align: right;">
+                            {{ (orderitem.price * orderitem.quantity) | craue_currency('EUR') }}
+                        </td>                                  
+                    </tr>
+                {% endfor %}  
+            </tbody>
+            <tfooter>
+                <tr>
+                    <td>
+                        
+                    </td>                    
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td style="color: #000;font-size: 20px;border-width:1px;border-style:solid;border-color:#333;text-align: right;">
+                        {{ (order.total) | craue_currency('EUR') }}
+                    </td>
+                </tr>
+            </tfooter>
+        </table>
+        <h1>{% trans %}We thanks you and we hope to see you next year.{% endtrans %}</h1>            
+    </body>
+</html>

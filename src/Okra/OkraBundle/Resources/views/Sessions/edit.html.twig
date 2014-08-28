@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+
+
+{% block title %}
+    {% trans %}Edit Sessions{% endtrans %}      
+{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1>Sessions edit</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('sessions') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

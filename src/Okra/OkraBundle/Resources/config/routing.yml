@@ -1,0 +1,60 @@
+okra_homepage:
+    path:     /{_locale}/
+    defaults: { _controller: OkraBundle:Default:index }
+
+okra_table:
+    path:     /{_locale}/table/{tableId}
+    defaults: { _controller: OkraBundle:Default:table }    
+
+okra_close:
+    path:     /{_locale}/close/{tableId}
+    defaults: { _controller: OkraBundle:Default:close }        
+
+okra_book:
+    path:     /{_locale}/book/
+    defaults: { _controller: OkraBundle:Default:book }        
+
+okra_buying:
+    path:     /{_locale}/buying/
+    defaults: { _controller: OkraBundle:Default:buying }   
+    
+okra_others:
+    path:     /{_locale}/others/
+    defaults: { _controller: OkraBundle:Default:others }   
+    
+    
+# app/config/routing.yml
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /{_locale}/profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /{_locale}/register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /{_locale}/resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /{_locale}/profile    
+    
+    
+    
+    
+OkraBundle_category:
+    resource: "@OkraBundle/Resources/config/routing/category.yml"
+    prefix:   /{_locale}/category    
+    
+OkraBundle_item:
+    resource: "@OkraBundle/Resources/config/routing/item.yml"
+    prefix:   /{_locale}/item    
+    
+OkraBundle_sessions:
+    resource: "@OkraBundle/Resources/config/routing/sessions.yml"
+    prefix:   /{_locale}/sessions    

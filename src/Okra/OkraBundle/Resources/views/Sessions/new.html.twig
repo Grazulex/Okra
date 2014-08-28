@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+
+
+{% block title %}
+    {% trans %}New Session{% endtrans %}      
+{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1>Sessions creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('sessions') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

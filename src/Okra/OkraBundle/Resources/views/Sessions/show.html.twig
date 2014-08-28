@@ -1,0 +1,47 @@
+{% extends "::base.html.twig" %}
+
+
+{% block title %}
+    {% trans %}View Sessions{% endtrans %}      
+{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1>Sessions</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Datestart</th>
+                <td>{{ entity.dateStart | craue_date  }}</td>
+            </tr>
+            <tr>
+                <th>Datestop</th>
+                <td>{{ entity.dateStop | craue_date  }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ entity.comment }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('sessions') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('sessions_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

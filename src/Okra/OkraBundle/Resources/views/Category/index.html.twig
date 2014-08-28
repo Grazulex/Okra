@@ -1,0 +1,54 @@
+{% extends "::base.html.twig" %}
+
+
+{% block title %}
+    {% trans %}List Category{% endtrans %}      
+{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1>{% trans %}List Category{% endtrans %}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{% trans %}#{% endtrans %}   </th>
+                <th>{% trans %}Name{% endtrans %}   </th>
+                <th>{% trans %}Actions{% endtrans %}   </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('category_show', { 'id': entity.id }) }}">{% trans %}View{% endtrans %}   </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('category_edit', { 'id': entity.id, 'locale':'fr' }) }}">{% trans %}Edit FR{% endtrans %}   </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('category_edit', { 'id': entity.id, 'locale':'nl' }) }}">{% trans %}Edit NL{% endtrans %}   </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('category_edit', { 'id': entity.id, 'locale':'en' }) }}">{% trans %}Edit EN{% endtrans %}   </a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('category_new') }}">
+                {% trans %}Create a new category{% endtrans %}   
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

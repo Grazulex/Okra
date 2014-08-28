@@ -1,0 +1,30 @@
+item:
+    path:     /list/
+    defaults: { _controller: "OkraBundle:Item:index" }
+
+item_show:
+    path:     /{id}/show
+    defaults: { _controller: "OkraBundle:Item:show" }
+
+item_new:
+    path:     /new
+    defaults: { _controller: "OkraBundle:Item:new" }
+
+item_create:
+    path:     /create
+    defaults: { _controller: "OkraBundle:Item:create" }
+    requirements: { _method: post }
+
+item_edit:
+    path:     /locale/{locale}/{id}/edit
+    defaults: { _controller: "OkraBundle:Item:edit" }
+
+item_update:
+    path:     /locale/{locale}/{id}/update
+    defaults: { _controller: "OkraBundle:Item:update" }
+    requirements: { _method: post|put }
+
+item_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "OkraBundle:Item:delete" }
+    requirements: { _method: post|delete }

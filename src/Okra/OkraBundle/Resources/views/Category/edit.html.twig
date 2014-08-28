@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+
+
+{% block title %}
+    {% trans %}Edit Category{% endtrans %}      
+{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1>{% trans %}Edit Category{% endtrans %}</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('category') }}">
+            {% trans %}Back to the list{% endtrans %}
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

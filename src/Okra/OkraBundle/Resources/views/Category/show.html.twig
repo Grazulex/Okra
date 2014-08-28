@@ -1,0 +1,39 @@
+{% extends "::base.html.twig" %}
+
+
+{% block title %}
+    {% trans %}View Category{% endtrans %}      
+{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1>{% trans %}View Category{% endtrans %}   </h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{% trans %}#{% endtrans %}   </th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}   </th>
+                <td>{{ entity.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('category') }}">
+            {% trans %}Back to list{% endtrans %}   
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('category_edit', { 'id': entity.id, 'locale': 'en' }) }}">
+            {% trans %}Edit{% endtrans %}   
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

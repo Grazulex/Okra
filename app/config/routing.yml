@@ -1,0 +1,5 @@
+okra:
+    resource: "@OkraBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+

@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+
+
+{% block title %}
+    {% trans %}New Item{% endtrans %}      
+{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1>Item creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('item') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

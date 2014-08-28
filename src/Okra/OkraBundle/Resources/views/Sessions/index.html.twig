@@ -1,0 +1,52 @@
+{% extends "::base.html.twig" %}
+
+
+{% block title %}
+    {% trans %}List Session{% endtrans %}      
+{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1>Sessions list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Datestart</th>
+                <th>Datestop</th>
+                <th>Comment</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('sessions_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.dateStart %}{{ entity.dateStart | craue_date }}{% endif %}</td>
+                <td>{% if entity.dateStop %}{{ entity.dateStop | craue_date }}{% endif %}</td>
+                <td>{{ entity.comment }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('sessions_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('sessions_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('sessions_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
