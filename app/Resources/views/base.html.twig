@@ -34,7 +34,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">	{{ "now"|date("d/m/Y H:i:s") }}</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag"></i> Lang <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag"></i> {% trans %}Languages{% endtrans %} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="{{ path('okra_homepage', {'_locale': 'fr'}) }}">FR</a>
@@ -51,16 +51,16 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-fw fa-user"></i> Profile</a>
+                                    <a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-fw fa-user"></i> {% trans %}Users{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('category') }}"><i class="fa fa-fw fa-book"></i> Category</a>
+                                    <a href="{{ path('category') }}"><i class="fa fa-fw fa-book"></i> {% trans %}Categories{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('item') }}"><i class="fa fa-fw fa-barcode"></i> Item</a>
+                                    <a href="{{ path('item') }}"><i class="fa fa-fw fa-barcode"></i> {% trans %}Items{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('sessions') }}"><i class="fa fa-fw fa-clock-o"></i> Sessions</a>
+                                    <a href="{{ path('sessions') }}"><i class="fa fa-fw fa-clock-o"></i> {% trans %}Sessions{% endtrans %}</a>
                                 </li>                                
                                 <li class="divider"></li>
                                     
