@@ -96,7 +96,7 @@ class DefaultController extends Controller
 
         //$Orders = $repository->findBy(array('idStatus'=>1),array("idTable"=>"asc", "idOrderManual"=>"asc"));
         $Orders = $repository->createQueryBuilder('o')
-            ->select(array('o.id, o.idTable, o.idOrderManual, u.username, o.dateCreate, o.total, timediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffhour'))    
+            ->select(array('o.id, o.idTable, o.idOrderManual, u.username, o.dateCreate, o.total, timediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffhour, datediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffday'))    
                 ->innerJoin('o.idUser','u')
             ->where('o.idStatus = :Status')
             ->setParameter('Status', 1)
@@ -197,6 +197,11 @@ class DefaultController extends Controller
             $newBook->setIdType(1);
             $em->persist($newBook);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                $this->get('translator')->trans('Book is saved !!')
+            );
         }      
         
         return $this->redirect($this->generateUrl('okra_homepage'));
@@ -223,6 +228,11 @@ class DefaultController extends Controller
             $newBuying->setIdType(2);
             $em->persist($newBuying);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                $this->get('translator')->trans('Buying is saved !!')
+            );            
         }        
         
         return $this->redirect($this->generateUrl('okra_homepage'));
@@ -231,6 +241,7 @@ class DefaultController extends Controller
     
     public function othersAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
+        $repositorySessions = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
         $newOthers = new Others();
         $newOthers->setDateCreate(new \DateTime('now'));
         $newOthers->setIdSession($repositorySessions->getActiveSession());
@@ -248,6 +259,11 @@ class DefaultController extends Controller
             $newOthers->setIdType(3);
             $em->persist($newOthers);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                $this->get('translator')->trans('Others is saved !!')
+            );           
         }        
         
         return $this->redirect($this->generateUrl('okra_homepage'));

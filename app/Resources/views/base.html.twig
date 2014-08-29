@@ -74,6 +74,11 @@
             <div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                            <div class="alert alert-success">
+                                {{ flashMessage }}
+                            </div>
+                        {% endfor %}
                         {% block content %}
             
                         {% endblock %}        

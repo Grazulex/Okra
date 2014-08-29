@@ -74,6 +74,7 @@ doctrine:
                         Year: Okra\OkraBundle\DQL\YearFunction
                         Month: Okra\OkraBundle\DQL\MonthFunction
                         Timediff: Okra\OkraBundle\DQL\TimediffFunction
+                        Datediff: Okra\OkraBundle\DQL\DatediffFunction
 
 # Swiftmailer Configuration
 swiftmailer:
