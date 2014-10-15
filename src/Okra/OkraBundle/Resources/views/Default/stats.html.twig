@@ -1,0 +1,50 @@
+{% extends "::base.html.twig" %}
+
+
+{% block title %}
+    {% trans %}Homepage{% endtrans %}    
+{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{% trans %}Item{% endtrans %}</th>
+                            <th>{% trans %}Price{% endtrans %}</th>
+                            {% for session in sessions %}
+                            <th>
+                                {{ session.dateStart | craue_date }} - {{ session.dateStop | craue_date }} 
+                                    {% if session.comment %} 
+                                        <br/> {{ session.comment }} 
+                                    {% endif %}
+                            </th>
+                            {% endfor %} 
+                        </tr>
+                    </thead>                    
+                    <tbody>
+                        {% for category in categories %}
+                            {% for item in items[category.id] %}
+                                <tr>
+                                    <td>
+                                        {{ item.name }}
+                                    </td>
+                                    <td>
+                                        {{ item.price | craue_currency('EUR') }}
+                                    </td>
+                                    {% for session in sessions %}
+                                        <td>
+                                            {{ session.id }}                                           
+                                        </td>
+                                    {% endfor %}                                     
+                                </tr>
+                            {% endfor %}  
+                        {% endfor %}     
+                    </tbody>
+                </table>
+        </div>
+    </div>
+{% endblock %}

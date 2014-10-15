@@ -22,6 +22,9 @@ okra_others:
     path:     /{_locale}/others/
     defaults: { _controller: OkraBundle:Default:others }   
     
+okra_stats:
+    path:     /{_locale}/stats/
+    defaults: { _controller: OkraBundle:Default:stats }     
     
 # app/config/routing.yml
 fos_user_security:

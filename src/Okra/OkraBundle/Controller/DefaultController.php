@@ -299,4 +299,26 @@ class DefaultController extends Controller
         );        
     }
     
+    public function statsAction() {
+        $em = $this->getDoctrine()->getManager();
+
+        $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
+        $categories = $repository->findAllByLocale($this->get('request')->getLocale());
+        
+        $repository= $this->getDoctrine()->getRepository('OkraBundle:Item');
+        $items = array();
+        foreach ($categories as $category) {    
+            $items[$category->getId()] = $repository->findAllByLocale($this->get('request')->getLocale(), $category->getId());
+        }
+        
+        $repository = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
+        $sessions = $repository->findBy(array("dateStop"=> null));
+        foreach ($sessions as $session) {    
+            $stats[$session->getId()] = $repository->getStats($session->getId());
+        }
+        
+        
+        return $this->render('OkraBundle:Default:stats.html.twig', array("categories"=>$categories, "items"=>$items, "sessions"=>$sessions, "stats"=>$stats));        
+    }
+    
 }

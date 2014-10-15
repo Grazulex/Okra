@@ -14,23 +14,7 @@ class OrdersItemRepository extends EntityRepository
 {
     public function getStats()
     {
-        return $this->getEntityManager()->createQueryBuilder()
-            ->select('i.id, c.name, i.name, year(o.dateCreate) as dateYear, month(o.dateCreate) as dateMonth, SUM(oi.quantity) as nbr, oi.price, SUM(oi.quantity * oi.price) as total')
-            ->from('OkraBundle:OrdersItem', 'oi')
-                ->innerJoin('oi.idItem','i')
-                    ->innerJoin('i.idCategory','c')
-                ->innerJoin('oi.idOrder','o')
-            ->where('o.idStatus IN (:Status)')
-            ->setParameter('Status', '2,3')
-            ->orderBy('dateYear', 'DESC')  
-                ->addOrderBy('dateMonth', 'DESC')
-                ->addOrderBy('c.name', 'ASC')
-                ->addOrderBy('i.name', 'ASC')
-            ->groupBy('dateYear')
-                ->addGroupBy('dateMonth')
-                ->addGroupBy('i.id')    
-            ->getQuery()
-            ->getResult()
-        ;
-    }    
+        return true;
+    }
+    
 }
