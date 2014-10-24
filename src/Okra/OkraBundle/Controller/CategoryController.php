@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Okra\OkraBundle\Entity\Category;
-use Okra\OkraBundle\Form\CategoryType;
+use Okra\OkraBundle\Form\Type\CategoryType;
 
 /**
  * Category controller.

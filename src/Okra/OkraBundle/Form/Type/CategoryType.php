@@ -1,13 +1,12 @@
 <?php
 
-namespace Okra\OkraBundle\Form;
+namespace Okra\OkraBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Okra\OkraBundle\Entity\Category;
 
-class ItemType extends AbstractType
+class CategoryType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -17,8 +16,6 @@ class ItemType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('price')
-            ->add('idCategory', 'entity', array('class' => 'OkraBundle:Category','property' => 'name'))
         ;
     }
     
@@ -28,7 +25,7 @@ class ItemType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Okra\OkraBundle\Entity\Item'
+            'data_class' => 'Okra\OkraBundle\Entity\Category'
         ));
     }
 
@@ -37,6 +34,6 @@ class ItemType extends AbstractType
      */
     public function getName()
     {
-        return 'okra_okrabundle_item';
+        return 'okra_okrabundle_category';
     }
 }

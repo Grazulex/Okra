@@ -1,12 +1,12 @@
 <?php
 
-namespace Okra\OkraBundle\Form;
+namespace Okra\OkraBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CategoryType extends AbstractType
+class SessionsType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,7 +15,9 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('dateStart')
+            ->add('dateStop')
+            ->add('comment')
         ;
     }
     
@@ -25,7 +27,7 @@ class CategoryType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Okra\OkraBundle\Entity\Category'
+            'data_class' => 'Okra\OkraBundle\Entity\Sessions'
         ));
     }
 
@@ -34,6 +36,6 @@ class CategoryType extends AbstractType
      */
     public function getName()
     {
-        return 'okra_okrabundle_category';
+        return 'okra_okrabundle_sessions';
     }
 }

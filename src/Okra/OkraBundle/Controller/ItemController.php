@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Okra\OkraBundle\Entity\Item;
-use Okra\OkraBundle\Form\ItemType;
+use Okra\OkraBundle\Form\Type\ItemType;
 
 /**
  * Item controller.

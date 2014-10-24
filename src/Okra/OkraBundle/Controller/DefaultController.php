@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Okra\OkraBundle\Entity\Orders;
 use Okra\OkraBundle\Entity\OrdersItem;
-use Okra\OkraBundle\Entity\Item;
 use Okra\OkraBundle\Entity\Others;
 
 
@@ -103,12 +102,9 @@ class DefaultController extends Controller
         $totalBuying = $repositoryOthers->getTotalBuyingTodayClose($actifSession);
         $totalOthers = $repositoryOthers->getTotalOthersTodayClose($actifSession);
         $totalStart = $repositoryOthers->getTotalStartsTodayClose($actifSession);
-        
-        $stats = $repositoryOrdersItem->getStats();
-        
+               
         $Gtotal = $totalStart + $total + $totalBook - $totalBuying + $totalOthers;
-
-        //$Orders = $repository->findBy(array('idStatus'=>1),array("idTable"=>"asc", "idOrderManual"=>"asc"));
+        
         $Orders = $repository->createQueryBuilder('o')
             ->select(array('o.id, o.idTable, o.idOrderManual, u.username, o.dateCreate, o.total, timediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffhour, datediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffday'))    
                 ->innerJoin('o.idUser','u')
@@ -151,7 +147,6 @@ class DefaultController extends Controller
                         if ($itemExists) {
                             $itemExists->setQuantity($itemExists->getQuantity() + $key);
                             $em->persist($itemExists);
-                            //$em->flush();    
                         } else {
                             $newOrderItems = new OrdersItem();
                             $newOrderItems->setIdOrder($order);
@@ -159,7 +154,6 @@ class DefaultController extends Controller
                             $newOrderItems->setIdItem($itemForm);
                             $newOrderItems->setPrice($itemForm->getPrice());
                             $em->persist($newOrderItems);
-                            //$em->flush();                            
                         }
                     }
                 }
@@ -333,13 +327,10 @@ class DefaultController extends Controller
         $repository = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
         $session = $repository->getActiveSession();
         $dates = array(array(array(array())));
-        //foreach ($sessions as $session) {    
-            $dates[$session->getId()] = $repository->getDates($session->getId());
-            foreach ($dates[$session->getId()] as $date) {
-                $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
-            }
-        //}
-        
+        $dates[$session->getId()] = $repository->getDates($session->getId());
+        foreach ($dates[$session->getId()] as $date) {
+            $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
+        }
         $total = $repositoryOrders->getTotalClose($session);
         $totalBook = $repositoryOthers->getTotalBookTodayClose($session);
         $totalBuying = $repositoryOthers->getTotalBuyingTodayClose($session);
@@ -408,12 +399,10 @@ class DefaultController extends Controller
         $repository = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
         $session = $repository->getActiveSession();
         $dates = array(array(array(array())));
-        //foreach ($sessions as $session) {    
-            $dates[$session->getId()] = $repository->getDates($session->getId());
-            foreach ($dates[$session->getId()] as $date) {
-                $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
-            }
-        //}
+        $dates[$session->getId()] = $repository->getDates($session->getId());
+        foreach ($dates[$session->getId()] as $date) {
+            $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
+        }
         
         $total = $repositoryOrders->getTotalClose($session);
         $totalBook = $repositoryOthers->getTotalBookTodayClose($session);

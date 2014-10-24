@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Okra\OkraBundle\Entity\Sessions;
-use Okra\OkraBundle\Form\SessionsType;
+use Okra\OkraBundle\Form\Type\SessionsType;
 
 /**
  * Sessions controller.
