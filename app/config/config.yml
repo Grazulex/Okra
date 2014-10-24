@@ -73,6 +73,7 @@ doctrine:
                     datetime_functions:
                         Year: Okra\OkraBundle\DQL\YearFunction
                         Month: Okra\OkraBundle\DQL\MonthFunction
+                        Day: Okra\OkraBundle\DQL\DayFunction
                         Timediff: Okra\OkraBundle\DQL\TimediffFunction
                         Datediff: Okra\OkraBundle\DQL\DatediffFunction
 

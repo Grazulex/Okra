@@ -10,6 +10,10 @@ okra_close:
     path:     /{_locale}/close/{tableId}
     defaults: { _controller: OkraBundle:Default:close }        
 
+okra_statsclose:
+    path:     /{_locale}/statsclose/{sessionId}
+    defaults: { _controller: OkraBundle:Default:statsclose } 
+
 okra_book:
     path:     /{_locale}/book/
     defaults: { _controller: OkraBundle:Default:book }        

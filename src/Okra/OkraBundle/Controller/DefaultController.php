@@ -313,7 +313,54 @@ class DefaultController extends Controller
         
         return $this->redirect($this->generateUrl('okra_homepage'));
         
-    }        
+    }
+    
+    public function statscloseAction($sessionId) {
+        $em = $this->getDoctrine()->getManager();
+       
+        $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
+        $repositoryOrders = $this->getDoctrine()->getRepository('OkraBundle:Orders');
+        $categories = $repository->findAllByLocale($this->get('request')->getLocale());
+        $repositoryOthers = $this->getDoctrine()->getRepository('OkraBundle:Others');
+        
+        $repository= $this->getDoctrine()->getRepository('OkraBundle:Item');
+        $items = array();
+        foreach ($categories as $category) {    
+            $items[$category->getId()] = $repository->findAllByLocale($this->get('request')->getLocale(), $category->getId());
+        }
+        
+        $repository = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
+        $session = $repository->getActiveSession();
+        $dates = array(array(array(array())));
+        //foreach ($sessions as $session) {    
+            $dates[$session->getId()] = $repository->getDates($session->getId());
+            foreach ($dates[$session->getId()] as $date) {
+                $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
+            }
+        //}
+        
+        $total = $repositoryOrders->getTotalClose($session);
+        $totalBook = $repositoryOthers->getTotalBookTodayClose($session);
+        $totalBuying = $repositoryOthers->getTotalBuyingTodayClose($session);
+        $totalOthers = $repositoryOthers->getTotalOthersTodayClose($session);
+        $totalStart = $repositoryOthers->getTotalStartsTodayClose($session);
+               
+        $Gtotal = $totalStart + $total + $totalBook - $totalBuying + $totalOthers;
+        
+        $html = $this->renderView('OkraBundle:Default:pdfstats.html.twig', array(
+            "categories"=>$categories, "items"=>$items, "session"=>$session, "statsTotal"=>$total, "stats"=>$stats, "dates"=>$dates,'totalStart'=>$totalStart, 'totalBook'=>$totalBook,'totalBuying'=>$totalBuying,'totalOthers'=>$totalOthers,'Gtotal'=>$Gtotal
+        ));
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, array('page-size' => 'A4')),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="file.pdf"'
+            )
+        );        
+        
+    }
     
     public function closeAction($tableId) {  
         $em = $this->getDoctrine()->getManager();
@@ -345,9 +392,11 @@ class DefaultController extends Controller
     
     public function statsAction() {
         $em = $this->getDoctrine()->getManager();
-
+       
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
+        $repositoryOrders = $this->getDoctrine()->getRepository('OkraBundle:Orders');
         $categories = $repository->findAllByLocale($this->get('request')->getLocale());
+        $repositoryOthers = $this->getDoctrine()->getRepository('OkraBundle:Others');
         
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Item');
         $items = array();
@@ -356,13 +405,24 @@ class DefaultController extends Controller
         }
         
         $repository = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
-        $sessions = $repository->findBy(array("dateStop"=> null));
-        foreach ($sessions as $session) {    
-            $stats[$session->getId()] = $repository->getStats($session->getId());
-        }
+        $session = $repository->getActiveSession();
+        $dates = array(array(array(array())));
+        //foreach ($sessions as $session) {    
+            $dates[$session->getId()] = $repository->getDates($session->getId());
+            foreach ($dates[$session->getId()] as $date) {
+                $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
+            }
+        //}
         
+        $total = $repositoryOrders->getTotalClose($session);
+        $totalBook = $repositoryOthers->getTotalBookTodayClose($session);
+        $totalBuying = $repositoryOthers->getTotalBuyingTodayClose($session);
+        $totalOthers = $repositoryOthers->getTotalOthersTodayClose($session);
+        $totalStart = $repositoryOthers->getTotalStartsTodayClose($session);
+               
+        $Gtotal = $totalStart + $total + $totalBook - $totalBuying + $totalOthers;
         
-        return $this->render('OkraBundle:Default:stats.html.twig', array("categories"=>$categories, "items"=>$items, "sessions"=>$sessions, "stats"=>$stats));        
+        return $this->render('OkraBundle:Default:stats.html.twig', array("categories"=>$categories, "items"=>$items, "session"=>$session, "statsTotal"=>$total, "stats"=>$stats, "dates"=>$dates,'totalStart'=>$totalStart, 'totalBook'=>$totalBook,'totalBuying'=>$totalBuying,'totalOthers'=>$totalOthers,'Gtotal'=>$Gtotal));        
     }
     
 }

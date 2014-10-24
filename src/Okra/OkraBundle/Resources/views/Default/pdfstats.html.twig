@@ -1,22 +1,19 @@
-{% extends "::base.html.twig" %}
-
-
-{% block title %}
-    {% trans %}Homepage{% endtrans %}    
-{% endblock %}
-
-{% block content_header '' %}
-
-{% block content %}
-
-    <div class="row">
-        <div class="col-lg-12">
-                <table class="table">
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <style type="text/css">
+        body {
+          font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+          color: #333
+        }
+        </style>
+    </head>
+    <body>
+                <table width="100%">
                     <thead>
                         <tr>
                             <th>{% trans %}Item{% endtrans %}</th>
                             <th>{% trans %}Price{% endtrans %}</th>
-
                                 <th>
                                     {{ session.dateStart | craue_date }} - {{ session.dateStop | craue_date }} 
                                         {% if session.comment %} 
@@ -36,13 +33,13 @@
                         {% for category in categories %}
                             {% for item in items[category.id] %}
                                 <tr>
-                                    <td>
+                                    <td style="border-bottom: dotted black;">
                                         {{ item.idCategory.name }} - {{ item.name }}
                                     </td>
-                                    <td>
+                                    <td style="border-bottom: dotted black;">
                                         {{ item.price | craue_currency('EUR') }}
                                     </td>
-                                    <td>
+                                    <td style="border-bottom: dotted black;">
                                         <table width="100%">
                                             <tbody>
                                                 {% for date in dates[session.id] %}
@@ -71,8 +68,8 @@
                         {% endfor %}     
                     </tbody>
                 </table>
-                    
-        <table class="table">
+                    <br/><br/>
+        <table width="100%">
             <tbody>
                 <tr>
                     <td class="text-left">{% trans %}Start{% endtrans %}</td>
@@ -100,18 +97,5 @@
                 </tr>                                
             </tbody>
         </table>                    
-        </div>
-        <div class="col-lg-12">
-            <a href="{{ path('okra_homepage') }}">
-                <button type="button" class="btn btn-default">  
-                    {% trans %}Back to the homepage{% endtrans %}
-                </button>
-            </a>                 
-            <a href="{{ path('okra_statsclose', {'sessionId': session.id}) }}">
-                <button type="button" class="btn btn-danger"> 
-                    {% trans %}Print{% endtrans %}
-                </button>
-            </a>    
-        </div>                
-    </div>
-{% endblock %}
+    </body>
+</html>
