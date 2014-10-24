@@ -12,7 +12,8 @@ class ItemRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
         $qb->select('a')
             ->where('a.idCategory = :Category')
-            ->setParameter('Category', $category);         
+            ->setParameter('Category', $category)
+            ->orderBy('a.name');         
 
         // Use Translation Walker
         $query = $qb->getQuery();

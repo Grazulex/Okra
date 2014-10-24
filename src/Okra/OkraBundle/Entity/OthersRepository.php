@@ -48,5 +48,18 @@ class OthersRepository extends EntityRepository
             ->getSingleScalarResult()
         ;
     }    
-    
+    public function getTotalStartsTodayClose($actifSession)
+    {
+        return $this->createQueryBuilder('a')
+            ->select('SUM(a.price)')
+            ->where('a.idType = :Type')
+                //->andWhere('a.dateCreate = :Today')
+                ->andWhere('a.idSession = :Session')
+            ->setParameter('Type', 4)
+            //->setParameter('Today', date("Y-m-d"))   
+            ->setParameter('Session', $actifSession)      
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }     
 }

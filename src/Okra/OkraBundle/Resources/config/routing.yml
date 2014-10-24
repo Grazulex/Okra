@@ -21,6 +21,10 @@ okra_buying:
 okra_others:
     path:     /{_locale}/others/
     defaults: { _controller: OkraBundle:Default:others }   
+
+okra_starts:
+    path:     /{_locale}/starts/
+    defaults: { _controller: OkraBundle:Default:starts } 
     
 okra_stats:
     path:     /{_locale}/stats/

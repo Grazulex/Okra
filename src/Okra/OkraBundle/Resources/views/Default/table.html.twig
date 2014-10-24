@@ -46,7 +46,11 @@
                         {% for orderitem in orderitems %}
                             <tr>
                                 <td>
-                                    {{ orderitem.idItem.name }}
+                                    {% if orderitem.idItem.idCategory.name == orderitem.idItem.name %}
+                                        {{ orderitem.idItem.name }}
+                                    {% else %}
+                                        {{ orderitem.idItem.idCategory.name }} - {{ orderitem.idItem.name }}
+                                    {% endif %}
                                 </td>
                                 <td>
                                     {{ orderitem.price | craue_currency('EUR') }}

@@ -210,6 +210,34 @@
           </div>
         </div>
             
+        <button type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#newStart">{% trans %}Start Cash{% endtrans %}</button>
+        
+        <div class="modal fade" id="newStart" tabindex="-1" role="dialog" aria-labelledby="Nieuw Start" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">{% trans %}Start Cash{% endtrans %}</h4>
+              </div>
+                {{ form_start(formStarts) }}    
+                <div class="modal-body">                    
+                      {{ form_errors(formStarts) }}
+                      
+                      {{ form_label(formStarts.price) }}
+                      {{ form_widget(formStarts.price) }}
+                      
+                      {{ form_label(formStarts.comment) }}
+                      {{ form_widget(formStarts.comment) }}
+                </div>
+                <div class="modal-footer">
+                  {{ form_widget(formStarts.button) }}
+                  {{ form_widget(formStarts.save) }}
+                </div>
+              {{ form_end(formStarts) }}    
+            </div>
+          </div>
+        </div>
+            
+            
         <br><br>
         <div class="panel panel-yellow">
             <div class="panel-heading">
@@ -243,28 +271,27 @@
         <table class="table">
             <tbody>
                 <tr>
+                    <td class="text-left">{% trans %}Start{% endtrans %}</td>
+                    <td class="text-right">{{ totalStart | craue_currency('EUR') }}</td>
+                </tr>                
+                <tr>
                     <td class="text-left">{% trans %}Sales{% endtrans %}</td>
-                    <td class="text-center">+</td>
                     <td class="text-right">{{ statsTotal | craue_currency('EUR') }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">{% trans %}Book{% endtrans %}</td>
-                    <td class="text-center">+</td>
                     <td class="text-right">{{ totalBook | craue_currency('EUR') }}</td>
                 </tr>                         
                 <tr>
                     <td class="text-left">{% trans %}Bying{% endtrans %}</td>
-                    <td class="text-center">-</td>
                     <td class="text-right">{{ totalBuying | craue_currency('EUR') }}</td>
                 </tr>
                 <tr>
                     <td class="text-left">{% trans %}Others{% endtrans %}</td>
-                    <td class="text-center">+</td>
                     <td class="text-right">{{ totalOthers | craue_currency('EUR') }}</td>
                 </tr>
                 <tr>
                     <td class="text-left"><strong>{% trans %}Total{% endtrans %}</strong></td>
-                    <td class="text-center"></td>
                     <td class="text-right"><strong>{{ Gtotal | craue_currency('EUR') }}</strong></td>
                 </tr>                                
             </tbody>

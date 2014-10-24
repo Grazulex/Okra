@@ -42,9 +42,6 @@
             <thead>
                 <tr width="100%">
                     <th>
-                        {% trans %}Category Name{% endtrans %}
-                    </th>                    
-                    <th>
                         {% trans %}Item Name{% endtrans %}
                     </th>
                     <th>
@@ -58,9 +55,6 @@
                     </th>                    
                 </tr>
                 <tr width="100%">
-                    <th>
-                        &nbsp;
-                    </th>                    
                     <th>
                         &nbsp;
                     </th>
@@ -79,10 +73,11 @@
                 {% for orderitem in orderitems %}
                     <tr>
                         <td style="border-width:1px;border-style:solid;border-color:#333;">
-                            {{ orderitem.idItem.idCategory.name }}
-                        </td>                        
-                        <td style="border-width:1px;border-style:solid;border-color:#333;">
-                            {{ orderitem.idItem.name }}
+                            {% if orderitem.idItem.idCategory.name == orderitem.idItem.name %}
+                                {{ orderitem.idItem.name }}
+                            {% else %}
+                                {{ orderitem.idItem.idCategory.name }} - {{ orderitem.idItem.name }}
+                            {% endif %}
                         </td>
                         <td style="border-width:1px;border-style:solid;border-color:#333;text-align: right;">
                             {{ orderitem.price | craue_currency('EUR') }}
@@ -98,9 +93,6 @@
             </tbody>
             <tfooter>
                 <tr>
-                    <td>
-                        
-                    </td>                    
                     <td>
                         
                     </td>
