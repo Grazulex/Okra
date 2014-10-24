@@ -33,14 +33,4 @@ assetic:
     use_controller: "%use_assetic_controller%"
 
 #swiftmailer:
-#    delivery_address: me@example.com
-
-knp_snappy:
-    pdf:
-        enabled:    true
-        binary:     "\"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe\""
-        options:    []
-    image:
-        enabled:    true
-        binary:     "\"C:/Program Files/wkhtmltopdf/bin/wkhtmltoimage.exe\""
-        options:    []        
+#    delivery_address: me@example.com     
