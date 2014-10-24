@@ -354,7 +354,6 @@ class DefaultController extends Controller
     
     public function closeAction($tableId) {  
         $em = $this->getDoctrine()->getManager();
-        $repositorySessions = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
         $repository = $this->getDoctrine()->getRepository('OkraBundle:Orders');
         $order = $repository->find($tableId);
         

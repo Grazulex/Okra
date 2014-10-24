@@ -43,8 +43,6 @@ class TimediffFunction extends FunctionNode
 */
     public function parse(\Doctrine\ORM\Query\Parser $parser)
     {
-        $lexer = $parser->getLexer();
- 
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
  
