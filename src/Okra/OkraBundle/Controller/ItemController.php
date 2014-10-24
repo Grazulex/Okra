@@ -169,8 +169,8 @@ class ItemController extends Controller
             throw $this->createNotFoundException('Unable to find Item entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id, $locale);
-        $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($entity, $locale);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
