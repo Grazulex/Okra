@@ -151,7 +151,7 @@ class DefaultController extends Controller
                         if ($itemExists) {
                             $itemExists->setQuantity($itemExists->getQuantity() + $key);
                             $em->persist($itemExists);
-                            $em->flush();    
+                            //$em->flush();    
                         } else {
                             $newOrderItems = new OrdersItem();
                             $newOrderItems->setIdOrder($order);
@@ -159,10 +159,11 @@ class DefaultController extends Controller
                             $newOrderItems->setIdItem($itemForm);
                             $newOrderItems->setPrice($itemForm->getPrice());
                             $em->persist($newOrderItems);
-                            $em->flush();                            
+                            //$em->flush();                            
                         }
                     }
                 }
+                $em->flush();
                 $repository = $this->getDoctrine()->getRepository('OkraBundle:OrdersItem');
                 $orderItems = $repository->findBy(array('idOrder'=>$tableId));
                 $total = 0;
