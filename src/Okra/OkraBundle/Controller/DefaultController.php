@@ -17,7 +17,6 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository('OkraBundle:Orders');
         $repositoryOthers = $this->getDoctrine()->getRepository('OkraBundle:Others');
-        $repositoryOrdersItem = $this->getDoctrine()->getRepository('OkraBundle:OrdersItem');
         $repositorySessions = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
         
         $actifSession = $repositorySessions->getActiveSession();
@@ -311,7 +310,6 @@ class DefaultController extends Controller
     }
     
     public function statscloseAction($sessionId) {
-        $em = $this->getDoctrine()->getManager();
        
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
         $repositoryOrders = $this->getDoctrine()->getRepository('OkraBundle:Orders');
@@ -382,9 +380,7 @@ class DefaultController extends Controller
         );        
     }
     
-    public function statsAction() {
-        $em = $this->getDoctrine()->getManager();
-       
+    public function statsAction() {       
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
         $repositoryOrders = $this->getDoctrine()->getRepository('OkraBundle:Orders');
         $categories = $repository->findAllByLocale($this->get('request')->getLocale());
