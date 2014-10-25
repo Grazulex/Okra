@@ -20,25 +20,7 @@
             </td>    
             <td style="text-align: center;">
                 <div class="progress">
-                    {% if order.diffday == 0 %}  
-                        {% if order.diffhour|date('H') > 0 %}
-                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                100%
-                            </div>                                            
-                        {% elseif order.diffhour|date('i') > 45 %}
-                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{ (order.diffhour|date('i') / 60) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ (order.diffhour|date('i') / 60) * 100 }}%">
-                                {{ ((order.diffhour|date('i') / 60) * 100) |round }}%
-                            </div>                                              
-                        {% else %}    
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ (order.diffhour|date('i') / 60) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ (order.diffhour|date('i') / 60) * 100 }}%">
-                                {{ ((order.diffhour|date('i') / 60) * 100) |round }}%
-                            </div>                                            
-                        {% endif %}   
-                    {% else %} 
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                            100%
-                        </div>                                            
-                    {% endif %}                                         
+                    {% include 'OkraBundle:Default:indexorderhour.html.twig'%} 
                 </div>
             </td>
             <td style="text-align: right;">{{ order.total | craue_currency('EUR') }}</td>
