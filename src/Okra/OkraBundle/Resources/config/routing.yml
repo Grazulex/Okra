@@ -69,4 +69,3 @@ OkraBundle_item:
 OkraBundle_sessions:
     resource: "@OkraBundle/Resources/config/routing/sessions.yml"
     prefix:   /{_locale}/sessions    
-    
