@@ -167,14 +167,12 @@ class DefaultController extends Controller
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
         $categories = $repository->findAllByLocale($this->get('request')->getLocale());
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Item');
-        $items = array();
         foreach ($categories as $category) {    
             $items[$category->getId()] = $repository->findAllByLocale($this->get('request')->getLocale(), $category->getId());
         }
         
         $repository = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
         $session = $repository->getActiveSession();
-        $dates = array(array(array(array())));
         $dates[$session->getId()] = $repository->getDates($session->getId());
         foreach ($dates[$session->getId()] as $date) {
             $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
@@ -234,14 +232,12 @@ class DefaultController extends Controller
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
         $categories = $repository->findAllByLocale($this->get('request')->getLocale());
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Item');
-        $items = array();
         foreach ($categories as $category) {    
             $items[$category->getId()] = $repository->findAllByLocale($this->get('request')->getLocale(), $category->getId());
         }
         
         $repository = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
         $session = $repository->getActiveSession();
-        $dates = array(array(array(array())));
         $dates[$session->getId()] = $repository->getDates($session->getId());
         foreach ($dates[$session->getId()] as $date) {
             $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
