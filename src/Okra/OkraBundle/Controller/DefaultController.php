@@ -164,12 +164,8 @@ class DefaultController extends Controller
     }
     
     public function statscloseAction($sessionId) {
-       
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
-        $repositoryOrders = $this->getDoctrine()->getRepository('OkraBundle:Orders');
         $categories = $repository->findAllByLocale($this->get('request')->getLocale());
-        $repositoryOthers = $this->getDoctrine()->getRepository('OkraBundle:Others');
-        
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Item');
         $items = array();
         foreach ($categories as $category) {    
@@ -183,11 +179,12 @@ class DefaultController extends Controller
         foreach ($dates[$session->getId()] as $date) {
             $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
         }
-        $total = $repositoryOrders->getTotalClose($session);
-        $totalBook = $repositoryOthers->getTotalBookTodayClose($session);
-        $totalBuying = $repositoryOthers->getTotalBuyingTodayClose($session);
-        $totalOthers = $repositoryOthers->getTotalOthersTodayClose($session);
-        $totalStart = $repositoryOthers->getTotalStartsTodayClose($session);
+        
+        $total = $this->getDoctrine()->getRepository('OkraBundle:Orders')->getTotalClose($session);
+        $totalBook = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalBookTodayClose($session);
+        $totalBuying = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalBuyingTodayClose($session);
+        $totalOthers = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalOthersTodayClose($session);
+        $totalStart = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalStartsTodayClose($session);
                
         $Gtotal = $totalStart + $total + $totalBook - $totalBuying + $totalOthers;
         
@@ -235,10 +232,7 @@ class DefaultController extends Controller
     
     public function statsAction() {       
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
-        $repositoryOrders = $this->getDoctrine()->getRepository('OkraBundle:Orders');
         $categories = $repository->findAllByLocale($this->get('request')->getLocale());
-        $repositoryOthers = $this->getDoctrine()->getRepository('OkraBundle:Others');
-        
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Item');
         $items = array();
         foreach ($categories as $category) {    
@@ -253,18 +247,18 @@ class DefaultController extends Controller
             $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
         }
         
-        $total = $repositoryOrders->getTotalClose($session);
-        $totalBook = $repositoryOthers->getTotalBookTodayClose($session);
-        $totalBuying = $repositoryOthers->getTotalBuyingTodayClose($session);
-        $totalOthers = $repositoryOthers->getTotalOthersTodayClose($session);
-        $totalStart = $repositoryOthers->getTotalStartsTodayClose($session);
+        $total = $this->getDoctrine()->getRepository('OkraBundle:Orders')->getTotalClose($session);
+        $totalBook = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalBookTodayClose($session);
+        $totalBuying = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalBuyingTodayClose($session);
+        $totalOthers = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalOthersTodayClose($session);
+        $totalStart = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalStartsTodayClose($session);
                
         $Gtotal = $totalStart + $total + $totalBook - $totalBuying + $totalOthers;
         
         return $this->render('OkraBundle:Default:stats.html.twig', array("categories"=>$categories, "items"=>$items, "session"=>$session, "statsTotal"=>$total, "stats"=>$stats, "dates"=>$dates,'totalStart'=>$totalStart, 'totalBook'=>$totalBook,'totalBuying'=>$totalBuying,'totalOthers'=>$totalOthers,'Gtotal'=>$Gtotal));        
     }
     
-    Public function createPersoForm($entity, $url, $label)
+    private function createPersoForm($entity, $url, $label)
     {
         return $this->createFormBuilder($entity)
             ->setAction($this->generateUrl($url))
@@ -276,7 +270,7 @@ class DefaultController extends Controller
             ->getForm();
     }
     
-    public function saveOther(Request $request, $type)
+    private function saveOther(Request $request, $type)
     {
         $em = $this->getDoctrine()->getManager();
         $repositorySessions = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
