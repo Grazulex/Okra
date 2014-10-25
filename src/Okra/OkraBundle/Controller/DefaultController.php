@@ -5,10 +5,6 @@ namespace Okra\OkraBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Okra\OkraBundle\Entity\Orders;
-use Okra\OkraBundle\Entity\OrdersItem;
-use Okra\OkraBundle\Entity\Others;
-
 
 class DefaultController extends Controller
 {
@@ -164,41 +160,7 @@ class DefaultController extends Controller
     }
     
     public function statscloseAction($sessionId) {
-        $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
-        $categories = $repository->findAllByLocale($this->get('request')->getLocale());
-        $repository= $this->getDoctrine()->getRepository('OkraBundle:Item');
-        foreach ($categories as $category) {    
-            $items[$category->getId()] = $repository->findAllByLocale($this->get('request')->getLocale(), $category->getId());
-        }
-        
-        $repository = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
-        $session = $repository->getActiveSession();
-        $dates[$session->getId()] = $repository->getDates($session->getId());
-        foreach ($dates[$session->getId()] as $date) {
-            $stats[$session->getId()][(int)$date['dateYear']][(int)$date['dateMonth']][(int)$date['dateDay']] = $repository->getStats($session->getId(),$date);
-        }
-        
-        $total = $this->getDoctrine()->getRepository('OkraBundle:Orders')->getTotalClose($session);
-        $totalBook = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalBookTodayClose($session);
-        $totalBuying = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalBuyingTodayClose($session);
-        $totalOthers = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalOthersTodayClose($session);
-        $totalStart = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalStartsTodayClose($session);
-               
-        $Gtotal = $totalStart + $total + $totalBook - $totalBuying + $totalOthers;
-        
-        $html = $this->renderView('OkraBundle:Default:pdfstats.html.twig', array(
-            "categories"=>$categories, "items"=>$items, "session"=>$session, "statsTotal"=>$total, "stats"=>$stats, "dates"=>$dates,'totalStart'=>$totalStart, 'totalBook'=>$totalBook,'totalBuying'=>$totalBuying,'totalOthers'=>$totalOthers,'Gtotal'=>$Gtotal
-        ));
-
-        return new Response(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, array('page-size' => 'A4')),
-            200,
-            array(
-                'Content-Type'          => 'application/pdf',
-                'Content-Disposition'   => 'attachment; filename="file.pdf"'
-            )
-        );        
-        
+            return $this->statsAction(true);
     }
     
     public function closeAction($tableId) {  
@@ -228,7 +190,7 @@ class DefaultController extends Controller
         );        
     }
     
-    public function statsAction() {       
+    public function statsAction($printed = false) {       
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');
         $categories = $repository->findAllByLocale($this->get('request')->getLocale());
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Item');
@@ -250,8 +212,22 @@ class DefaultController extends Controller
         $totalStart = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalStartsTodayClose($session);
                
         $Gtotal = $totalStart + $total + $totalBook - $totalBuying + $totalOthers;
-        
-        return $this->render('OkraBundle:Default:stats.html.twig', array("categories"=>$categories, "items"=>$items, "session"=>$session, "statsTotal"=>$total, "stats"=>$stats, "dates"=>$dates,'totalStart'=>$totalStart, 'totalBook'=>$totalBook,'totalBuying'=>$totalBuying,'totalOthers'=>$totalOthers,'Gtotal'=>$Gtotal));        
+        if ($printed == true) {
+            $html = $this->renderView('OkraBundle:Default:pdfstats.html.twig', array(
+                "categories"=>$categories, "items"=>$items, "session"=>$session, "statsTotal"=>$total, "stats"=>$stats, "dates"=>$dates,'totalStart'=>$totalStart, 'totalBook'=>$totalBook,'totalBuying'=>$totalBuying,'totalOthers'=>$totalOthers,'Gtotal'=>$Gtotal
+            ));
+
+            return new Response(
+                $this->get('knp_snappy.pdf')->getOutputFromHtml($html, array('page-size' => 'A4')),
+                200,
+                array(
+                    'Content-Type'          => 'application/pdf',
+                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
+                )
+            );        
+        } else {
+            return $this->render('OkraBundle:Default:stats.html.twig', array("categories"=>$categories, "items"=>$items, "session"=>$session, "statsTotal"=>$total, "stats"=>$stats, "dates"=>$dates,'totalStart'=>$totalStart, 'totalBook'=>$totalBook,'totalBuying'=>$totalBuying,'totalOthers'=>$totalOthers,'Gtotal'=>$Gtotal));        
+        }
     }
     
     private function createPersoForm($entity, $url, $label)
