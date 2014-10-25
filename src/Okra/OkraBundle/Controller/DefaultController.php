@@ -21,12 +21,8 @@ class DefaultController extends Controller
         
         $actifSession = $repositorySessions->getActiveSession();
         
-        $newOrder = new Orders();
-        $newOrder->setIdStatus(1);
-        $newOrder->setDateCreate(new \DateTime('now'));
-        $newOrder->setTotal(0);
-        $newOrder->setIdSession($actifSession);
-        
+        $newOrder = $repository->createNewOrder($actifSession);
+
         $form = $this->createFormBuilder($newOrder)
             ->setAction($this->generateUrl('okra_homepage'))
             ->setMethod('post')
@@ -45,53 +41,20 @@ class DefaultController extends Controller
             $em->flush();
         }
 
-        $newBook = new Others();
-        $newBook->setDateCreate(new \DateTime('now'));
-        $formBook = $this->createFormBuilder($newBook)
-            ->setAction($this->generateUrl('okra_book'))
-            ->setMethod('post')
-            ->add('price', 'number',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Price'))
-            ->add('comment', 'text',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Comment'))
-            ->add('save', 'submit', array('attr'=> array('class'=>'btn btn-primary'), 'label' => 'Create book'))
-            ->add('button', 'button', array('attr'=> array('class'=>'btn btn-default', 'data-dismiss' => 'modal'), 'label' => 'Cancel'))    
-            ->getForm();
-                
-
-        $newBuying = new Others();
-        $newBuying->setDateCreate(new \DateTime('now'));
-        $formBuying = $this->createFormBuilder($newBuying)
-            ->setAction($this->generateUrl('okra_buying'))
-            ->setMethod('post')
-            ->add('price', 'number',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Price'))
-            ->add('comment', 'text',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Comment'))
-            ->add('save', 'submit', array('attr'=> array('class'=>'btn btn-primary'), 'label' => 'Create bying'))
-            ->add('button', 'button', array('attr'=> array('class'=>'btn btn-default', 'data-dismiss' => 'modal'), 'label' => 'Cancel'))    
-            ->getForm();
-        $formBuying->handleRequest($request);
+        $newBook = $repositoryOthers->createNewOther();
+        $formBook = $this->createPersoForm($newBook, 'okra_book', 'Create book');                
+        $formBook->handleRequest($request);   
         
+        $newBuying = $repositoryOthers->createNewOther();
+        $formBuying = $this->createPersoForm($newBuying, 'okra_buying', 'Create bying'); 
+        $formBuying->handleRequest($request);   
         
-        $newOthers = new Others();
-        $newOthers->setDateCreate(new \DateTime('now'));
-        $formOthers = $this->createFormBuilder($newOthers)
-            ->setAction($this->generateUrl('okra_others'))
-            ->setMethod('post')
-            ->add('price', 'number',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Price'))
-            ->add('comment', 'text',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Comment'))
-            ->add('save', 'submit', array('attr'=> array('class'=>'btn btn-primary'), 'label' => 'Create others'))
-            ->add('button', 'button', array('attr'=> array('class'=>'btn btn-default', 'data-dismiss' => 'modal'), 'label' => 'Cancel'))    
-            ->getForm();
-        $formOthers->handleRequest($request);
+        $newOthers = $repositoryOthers->createNewOther();
+        $formOthers = $this->createPersoForm($newOthers, 'okra_others', 'Create others'); 
+        $formOthers->handleRequest($request);   
         
-        $newStarts = new Others();
-        $newStarts->setDateCreate(new \DateTime('now'));
-        $formStarts = $this->createFormBuilder($newStarts)
-            ->setAction($this->generateUrl('okra_starts'))
-            ->setMethod('post')
-            ->add('price', 'number',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Price'))
-            ->add('comment', 'text',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Comment'))
-            ->add('save', 'submit', array('attr'=> array('class'=>'btn btn-primary'), 'label' => 'Create start'))
-            ->add('button', 'button', array('attr'=> array('class'=>'btn btn-default', 'data-dismiss' => 'modal'), 'label' => 'Cancel'))    
-            ->getForm();
+        $newStarts = $repositoryOthers->createNewOther();
+        $formStarts = $this->createPersoForm($newStarts, 'okra_starts', 'Create start'); 
         $formStarts->handleRequest($request);        
                 
         
@@ -104,16 +67,7 @@ class DefaultController extends Controller
                
         $Gtotal = $totalStart + $total + $totalBook - $totalBuying + $totalOthers;
         
-        $Orders = $repository->createQueryBuilder('o')
-            ->select(array('o.id, o.idTable, o.idOrderManual, u.username, o.dateCreate, o.total, timediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffhour, datediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffday'))    
-                ->innerJoin('o.idUser','u')
-            ->where('o.idStatus = :Status')
-            ->setParameter('Status', 1)
-            ->orderBy('o.idTable', 'ASC')  
-                ->addOrderBy('o.idOrderManual', 'ASC')                
-            ->getQuery()
-            ->getResult()
-        ;
+        $Orders = $repository->getAllOpen();
         return $this->render('OkraBundle:Default:index.html.twig', array("actifsession"=>$actifSession, "locale"=>$this->get('request')->getLocale(), "orders"=>$Orders, "statsCount"=>$count, "statsTotal"=>$total, 'form' => $form->createView(), 'formBook' => $formBook->createView(), 'formBuying' => $formBuying->createView(), 'formOthers' => $formOthers->createView(), 'formStarts' => $formStarts->createView(),'totalStart'=>$totalStart, 'totalBook'=>$totalBook,'totalBuying'=>$totalBuying,'totalOthers'=>$totalOthers,'Gtotal'=>$Gtotal));
     }
     
@@ -186,125 +140,25 @@ class DefaultController extends Controller
     }
     
     public function bookAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repositorySessions = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
-        $newBook = new Others();
-        $newBook->setDateCreate(new \DateTime('now'));
-        $newBook->setIdSession($repositorySessions->getActiveSession());
-        $formBook = $this->createFormBuilder($newBook)
-            ->setAction($this->generateUrl('okra_homepage'))
-            ->setMethod('post')
-            ->add('price', 'number',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Price'))
-            ->add('comment', 'text',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Comment'))
-            ->add('save', 'submit', array('attr'=> array('class'=>'btn btn-primary'), 'label' => 'Create book'))
-            ->add('button', 'button', array('attr'=> array('class'=>'btn btn-default', 'data-dismiss' => 'modal'), 'label' => 'Cancel'))    
-            ->getForm();
-        $formBook->handleRequest($request);
-        
-        if ($formBook->isValid()) {
-            $newBook->setIdType(1);
-            $em->persist($newBook);
-            $em->flush();
-            
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                $this->get('translator')->trans('Book is saved !!')
-            );
-        }      
-        
+        $this->saveOther($request, 1);
         return $this->redirect($this->generateUrl('okra_homepage'));
         
     }
     
     public function buyingAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repositorySessions = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
-        $newBuying = new Others();
-        $newBuying->setDateCreate(new \DateTime('now'));
-        $newBuying->setIdSession($repositorySessions->getActiveSession());
-        $formBuying = $this->createFormBuilder($newBuying)
-            ->setAction($this->generateUrl('okra_homepage'))
-            ->setMethod('post')
-            ->add('price', 'number',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Price'))
-            ->add('comment', 'text',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Comment'))
-            ->add('save', 'submit', array('attr'=> array('class'=>'btn btn-primary'), 'label' => 'Create bying'))
-            ->add('button', 'button', array('attr'=> array('class'=>'btn btn-default', 'data-dismiss' => 'modal'), 'label' => 'Cancel'))    
-            ->getForm();
-        $formBuying->handleRequest($request);
-        
-        if ($formBuying->isValid()) {
-            $newBuying->setIdType(2);
-            $em->persist($newBuying);
-            $em->flush();
-            
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                $this->get('translator')->trans('Buying is saved !!')
-            );            
-        }        
-        
+        $this->saveOther($request, 2);
         return $this->redirect($this->generateUrl('okra_homepage'));
         
     }
     
     public function othersAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repositorySessions = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
-        $newOthers = new Others();
-        $newOthers->setDateCreate(new \DateTime('now'));
-        $newOthers->setIdSession($repositorySessions->getActiveSession());
-        $formOthers = $this->createFormBuilder($newOthers)
-            ->setAction($this->generateUrl('okra_homepage'))
-            ->setMethod('post')
-            ->add('price', 'number',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Price'))
-            ->add('comment', 'text',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Comment'))
-            ->add('save', 'submit', array('attr'=> array('class'=>'btn btn-primary'), 'label' => 'Create others'))
-            ->add('button', 'button', array('attr'=> array('class'=>'btn btn-default', 'data-dismiss' => 'modal'), 'label' => 'Cancel'))    
-            ->getForm();
-        $formOthers->handleRequest($request);
-        
-        if ($formOthers->isValid()) {
-            $newOthers->setIdType(3);
-            $em->persist($newOthers);
-            $em->flush();
-            
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                $this->get('translator')->trans('Others is saved !!')
-            );           
-        }        
-        
+        $this->saveOther($request, 3);
         return $this->redirect($this->generateUrl('okra_homepage'));
         
     }    
 
     public function startsAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repositorySessions = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
-        $newOthers = new Others();
-        $newOthers->setDateCreate(new \DateTime('now'));
-        $newOthers->setIdSession($repositorySessions->getActiveSession());
-        $formOthers = $this->createFormBuilder($newOthers)
-            ->setAction($this->generateUrl('okra_homepage'))
-            ->setMethod('post')
-            ->add('price', 'number',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Price'))
-            ->add('comment', 'text',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Comment'))
-            ->add('save', 'submit', array('attr'=> array('class'=>'btn btn-primary'), 'label' => 'Create others'))
-            ->add('button', 'button', array('attr'=> array('class'=>'btn btn-default', 'data-dismiss' => 'modal'), 'label' => 'Cancel'))    
-            ->getForm();
-        $formOthers->handleRequest($request);
-        
-        if ($formOthers->isValid()) {
-            $newOthers->setIdType(4);
-            $em->persist($newOthers);
-            $em->flush();
-            
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                $this->get('translator')->trans('Starts is saved !!')
-            );           
-        }        
-        
+        $this->saveOther($request, 4);
         return $this->redirect($this->generateUrl('okra_homepage'));
         
     }
@@ -410,4 +264,36 @@ class DefaultController extends Controller
         return $this->render('OkraBundle:Default:stats.html.twig', array("categories"=>$categories, "items"=>$items, "session"=>$session, "statsTotal"=>$total, "stats"=>$stats, "dates"=>$dates,'totalStart'=>$totalStart, 'totalBook'=>$totalBook,'totalBuying'=>$totalBuying,'totalOthers'=>$totalOthers,'Gtotal'=>$Gtotal));        
     }
     
+    Public function createPersoForm($entity, $url, $label)
+    {
+        return $this->createFormBuilder($entity)
+            ->setAction($this->generateUrl($url))
+            ->setMethod('post')
+            ->add('price', 'number',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Price'))
+            ->add('comment', 'text',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Comment'))
+            ->add('save', 'submit', array('attr'=> array('class'=>'btn btn-primary'), 'label' => $label))
+            ->add('button', 'button', array('attr'=> array('class'=>'btn btn-default', 'data-dismiss' => 'modal'), 'label' => 'Cancel'))    
+            ->getForm();
+    }
+    
+    public function saveOther(Request $request, $type)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repositorySessions = $this->getDoctrine()->getRepository('OkraBundle:Sessions');
+        $repositoryOthers = $this->getDoctrine()->getRepository('OkraBundle:Others');     
+        $newOthers = $repositoryOthers->createNewOther($repositorySessions->getActiveSession());
+        $formOthers = $this->createPersoForm($newOthers, 'okra_homepage', 'Create others');  
+        $formOthers->handleRequest($request);
+        
+        if ($formOthers->isValid()) {
+            $newOthers->setIdType($type);
+            $em->persist($newOthers);
+            $em->flush();
+            
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                $this->get('translator')->trans('Starts is saved !!')
+            );           
+        }             
+    }
 }

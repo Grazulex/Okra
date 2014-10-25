@@ -62,4 +62,14 @@ class OthersRepository extends EntityRepository
             ->getSingleScalarResult()
         ;
     }     
+    
+    public function createNewOther($actifSession = null)
+    {
+        $newBook = new Others();
+        $newBook->setDateCreate(new \DateTime('now')); 
+        if ($actifSession) {
+            $newBook->setIdSession($actifSession);
+        }
+        return $newBook;
+    }
 }
