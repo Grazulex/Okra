@@ -10,24 +10,7 @@
             <td>
                 <table width="100%">
                     <tbody>
-                        {% for date in dates[session.id] %}
-                            <td width="{{ 100 / loop.length }}%">
-                            {% for stat in stats[session.id][date.dateYear][date.dateMonth][date.dateDay] %}
-                                {% if (stat.id == item.id) and (stat.dateDay == date.dateDay) and (stat.dateMonth == date.dateMonth) and (stat.dateYear == date.dateYear) %} 
-                                    <table width="100%">
-                                        <tr>
-                                            <td width="50%">
-                                                {{ stat.nbr }}    
-                                            </td>
-                                            <td width="50%">
-                                                {{ stat.total | craue_currency('EUR') }}    
-                                            </td>                                                                    
-                                        </tr>
-                                    </table>
-                                {% endif %}
-                            {% endfor %}           
-                            </td>
-                        {% endfor %}  
+                        {% include 'OkraBundle:Default:statsitemcount.html.twig'%}                           
                     </tbody>
                 </table>
             </td>
