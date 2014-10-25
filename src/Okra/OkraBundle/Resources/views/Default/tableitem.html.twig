@@ -1,0 +1,44 @@
+<div class="panel-group" id=accordion">
+    {% for category in categories %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ category.id }}">
+                  {{ category.name }}
+                </a>
+              </h4>
+            </div>
+            <div id="collapse{{ category.id }}" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table"  style="font-size:11px;">
+                        <thead>
+                            <tr>
+                                <th>{% trans %}Item{% endtrans %}</th>
+                                <th>{% trans %}Price{% endtrans %}</th>
+                                <th>{% trans %}Quantity{% endtrans %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items[category.id] %}
+                                <tr>
+                                    <td>
+                                        {{ item.name }}
+                                    </td>
+                                    <td>
+                                        {{ item.price | craue_currency('EUR') }}
+                                    </td>
+                                    <td>
+                                        <input type="number" name="quant[{{ item.id }}]" class="form-control input-sm">                                                                
+                                    </td>
+                                </tr>
+                            {% endfor %}  
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+        </div>
+    {% endfor %}                    
+</div>
+

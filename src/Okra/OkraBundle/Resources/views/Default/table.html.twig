@@ -43,26 +43,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for orderitem in orderitems %}
-                            <tr>
-                                <td>
-                                    {% if orderitem.idItem.idCategory.name == orderitem.idItem.name %}
-                                        {{ orderitem.idItem.name }}
-                                    {% else %}
-                                        {{ orderitem.idItem.idCategory.name }} - {{ orderitem.idItem.name }}
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {{ orderitem.price | craue_currency('EUR') }}
-                                </td>      
-                                <td>
-                                    {{ orderitem.quantity }}
-                                </td>    
-                                <td>
-                                    {{ (orderitem.price * orderitem.quantity) | craue_currency('EUR') }}
-                                </td>                                  
-                            </tr>
-                        {% endfor %}       
+                        {% include 'OkraBundle:Default:tableorder.html.twig' %}      
                     </tbody>
                 </table>
             </div>
@@ -72,49 +53,7 @@
         <div class="col-lg-6">
             <h4>{% trans %}Add{% endtrans %}</h4>
             {{ form_start(form) }}
-                <div class="panel-group" id=accordion">
-                    {% for category in categories %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ category.id }}">
-                                  {{ category.name }}
-                                </a>
-                              </h4>
-                            </div>
-                            <div id="collapse{{ category.id }}" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table"  style="font-size:11px;">
-                                        <thead>
-                                            <tr>
-                                                <th>{% trans %}Item{% endtrans %}</th>
-                                                <th>{% trans %}Price{% endtrans %}</th>
-                                                <th>{% trans %}Quantity{% endtrans %}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for item in items[category.id] %}
-                                                <tr>
-                                                    <td>
-                                                        {{ item.name }}
-                                                    </td>
-                                                    <td>
-                                                        {{ item.price | craue_currency('EUR') }}
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" name="quant[{{ item.id }}]" class="form-control input-sm">                                                                
-                                                    </td>
-                                                </tr>
-                                            {% endfor %}  
-                                        </tbody>
-                                    </table>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                    {% endfor %}                    
-                </div>
+                {% include 'OkraBundle:Default:tableitem.html.twig'%}  
             {{ form_end(form) }}  
         </div>
         <div class="col-lg-12">
