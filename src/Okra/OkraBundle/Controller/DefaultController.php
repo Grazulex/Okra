@@ -5,6 +5,7 @@ namespace Okra\OkraBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Okra\OkraBundle\Entity\OrdersItem;
 
 class DefaultController extends Controller
 {
