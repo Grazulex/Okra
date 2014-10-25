@@ -213,7 +213,7 @@ class DefaultController extends Controller
         $totalStart = $this->getDoctrine()->getRepository('OkraBundle:Others')->getTotalStartsTodayClose($session);
                
         $Gtotal = $totalStart + $total + $totalBook - $totalBuying + $totalOthers;
-        if ($printed == true) {
+        if ($printed === true) {
             $html = $this->renderView('OkraBundle:Default:pdfstats.html.twig', array(
                 "categories"=>$categories, "items"=>$items, "session"=>$session, "statsTotal"=>$total, "stats"=>$stats, "dates"=>$dates,'totalStart'=>$totalStart, 'totalBook'=>$totalBook,'totalBuying'=>$totalBuying,'totalOthers'=>$totalOthers,'Gtotal'=>$Gtotal
             ));
