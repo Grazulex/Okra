@@ -1,39 +1,48 @@
 okra_homepage:
     path:     /{_locale}/
     defaults: { _controller: OkraBundle:Default:index }
-
+    requirements:
+        _method:  GET
 okra_table:
     path:     /{_locale}/table/{tableId}
     defaults: { _controller: OkraBundle:Default:table }    
-
+    requirements:
+            _method:  GET|POST
 okra_close:
     path:     /{_locale}/close/{tableId}
     defaults: { _controller: OkraBundle:Default:close }        
-
+    requirements:
+        _method:  GET
 okra_statsclose:
     path:     /{_locale}/statsclose/{sessionId}
     defaults: { _controller: OkraBundle:Default:statsclose } 
-
+    requirements:
+        _method:  GET
 okra_book:
     path:     /{_locale}/book/
     defaults: { _controller: OkraBundle:Default:book }        
-
+    requirements:
+            _method:  GET|POST
 okra_buying:
     path:     /{_locale}/buying/
     defaults: { _controller: OkraBundle:Default:buying }   
-    
+    requirements:
+            _method:  GET|POST    
 okra_others:
     path:     /{_locale}/others/
     defaults: { _controller: OkraBundle:Default:others }   
-
+    requirements:
+            _method:  GET|POST
 okra_starts:
     path:     /{_locale}/starts/
     defaults: { _controller: OkraBundle:Default:starts } 
-    
+    requirements:
+            _method:  GET|POST    
 okra_stats:
     path:     /{_locale}/stats/
     defaults: { _controller: OkraBundle:Default:stats }     
-    
+    requirements:
+        _method:  GET    
 # app/config/routing.yml
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

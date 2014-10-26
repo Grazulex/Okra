@@ -1,15 +1,18 @@
 item:
     path:     /list/
     defaults: { _controller: "OkraBundle:Item:index" }
-
+    requirements:
+            _method:  GET
 item_show:
     path:     /{id}/show
     defaults: { _controller: "OkraBundle:Item:show" }
-
+    requirements:
+            _method:  GET
 item_new:
     path:     /new
     defaults: { _controller: "OkraBundle:Item:new" }
-
+    requirements:
+            _method:  GET|POST
 item_create:
     path:     /create
     defaults: { _controller: "OkraBundle:Item:create" }
@@ -18,12 +21,12 @@ item_create:
 item_edit:
     path:     /locale/{locale}/{id}/edit
     defaults: { _controller: "OkraBundle:Item:edit" }
-
+    requirements:
+            _method:  GET|POST
 item_update:
     path:     /locale/{locale}/{id}/update
     defaults: { _controller: "OkraBundle:Item:update" }
     requirements: { _method: post|put }
-
 item_delete:
     path:     /{id}/delete
     defaults: { _controller: "OkraBundle:Item:delete" }

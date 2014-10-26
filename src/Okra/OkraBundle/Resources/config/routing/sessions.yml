@@ -1,24 +1,27 @@
 sessions:
     path:     /
     defaults: { _controller: "OkraBundle:Sessions:index" }
-
+    requirements:
+            _method:  GET
 sessions_show:
     path:     /{id}/show
     defaults: { _controller: "OkraBundle:Sessions:show" }
-
+    requirements:
+            _method:  GET
 sessions_new:
     path:     /new
     defaults: { _controller: "OkraBundle:Sessions:new" }
-
+    requirements:
+            _method:  GET|POST
 sessions_create:
     path:     /create
     defaults: { _controller: "OkraBundle:Sessions:create" }
     requirements: { _method: post }
-
 sessions_edit:
     path:     /{id}/edit
     defaults: { _controller: "OkraBundle:Sessions:edit" }
-
+    requirements:
+            _method:  GET|POST
 sessions_update:
     path:     /{id}/update
     defaults: { _controller: "OkraBundle:Sessions:update" }

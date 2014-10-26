@@ -1,15 +1,18 @@
 category:
     path:     /list/
     defaults: { _controller: "OkraBundle:Category:index" }
-
+    requirements:
+            _method:  GET
 category_show:
     path:     /{id}/show
     defaults: { _controller: "OkraBundle:Category:show" }
-
+    requirements:
+            _method:  GET
 category_new:
     path:     /new
     defaults: { _controller: "OkraBundle:Category:new" }
-
+    requirements:
+            _method:  GET|POST
 category_create:
     path:     /create
     defaults: { _controller: "OkraBundle:Category:create" }
@@ -18,7 +21,8 @@ category_create:
 category_edit:
     path:     /locale/{locale}/{id}/edit
     defaults: { _controller: "OkraBundle:Category:edit" }
-
+    requirements:
+            _method:  GET|POST
 category_update:
     path:     /locale/{locale}/{id}/update
     defaults: { _controller: "OkraBundle:Category:update" }
