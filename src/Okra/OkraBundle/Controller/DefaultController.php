@@ -36,6 +36,7 @@ class DefaultController extends Controller
             
             $em->persist($newOrder);
             $em->flush();
+            return $this->redirect($this->generateUrl('okra_homepage'));
         }
 
         $newBook = $repositoryOthers->createNewOther();

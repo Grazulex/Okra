@@ -21,7 +21,7 @@ sessions_edit:
     path:     /{id}/edit
     defaults: { _controller: "OkraBundle:Sessions:edit" }
     requirements:
-            _method:  GET|POST
+            _method:  GET
 sessions_update:
     path:     /{id}/update
     defaults: { _controller: "OkraBundle:Sessions:update" }

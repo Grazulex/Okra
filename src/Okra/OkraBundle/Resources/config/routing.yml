@@ -12,7 +12,7 @@ okra_close:
     path:     /{_locale}/close/{tableId}
     defaults: { _controller: OkraBundle:Default:close }        
     requirements:
-        _method:  GET|POST
+        _method:  GET
 okra_statsclose:
     path:     /{_locale}/statsclose/{sessionId}
     defaults: { _controller: OkraBundle:Default:statsclose } 

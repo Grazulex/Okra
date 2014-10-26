@@ -22,7 +22,7 @@ category_edit:
     path:     /locale/{locale}/{id}/edit
     defaults: { _controller: "OkraBundle:Category:edit" }
     requirements:
-            _method:  GET|POST
+            _method:  GET
 category_update:
     path:     /locale/{locale}/{id}/update
     defaults: { _controller: "OkraBundle:Category:update" }
