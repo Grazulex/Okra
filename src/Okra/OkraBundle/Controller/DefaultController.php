@@ -117,6 +117,8 @@ class DefaultController extends Controller
                 $order->setTotal($total);
                 $em->persist($order);
                 $em->flush();
+                
+                return $this->redirect($this->generateUrl('okra_homepage'));
             }
         }        
         
