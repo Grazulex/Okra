@@ -27,7 +27,11 @@
         "knplabs/knp-snappy-bundle": "~1.0@dev"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "phpunit/phpunit": "4.3.*",
+        "phpunit/phpunit-story": ">=1.0.2",
+        "phpunit/dbunit": ">=1.2",
+        "phpunit/phpunit-selenium": ">=1.2"
     },
     "scripts": {
         "post-root-package-install": [
