@@ -2,7 +2,7 @@ okra_homepage:
     path:     /{_locale}/
     defaults: { _controller: OkraBundle:Default:index }
     requirements:
-        _method:  GET
+        _method:  GET|POST
 okra_table:
     path:     /{_locale}/table/{tableId}
     defaults: { _controller: OkraBundle:Default:table }    
