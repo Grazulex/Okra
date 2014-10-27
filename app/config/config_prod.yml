@@ -1,15 +1,18 @@
 imports:
     - { resource: config.yml }
 
-#framework:
-#    validation:
-#        cache: apc
+framework:
+    validation:
+        cache: ~
 
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
+doctrine:
+    orm:
+        metadata_cache_driver: 
+            type: array 
+        result_cache_driver: 
+            type: array 
+        query_cache_driver: 
+            type: array 
 
 monolog:
     handlers:
@@ -23,3 +26,7 @@ monolog:
             level: debug
         console:
             type:  console
+            
+fkr_css_url_rewrite:
+    rewrite_only_if_file_exists: true
+    clear_urls: true            

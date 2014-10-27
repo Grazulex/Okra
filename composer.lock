@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2376e8c38a54609b7816469ffd98e433",
+    "hash": "f0bdd48f57e89f8750e100ca8a4cb209",
     "packages": [
         {
             "name": "craue/twigextensions-bundle",
@@ -780,6 +780,54 @@
             "time": "2014-10-06 13:22:50"
         },
         {
+            "name": "fkr/cssurlrewrite-bundle",
+            "version": "v1.0.0",
+            "target-dir": "Fkr/CssURLRewriteBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fkrauthan/FkrCssURLRewriteBundle.git",
+                "reference": "01b4986d22998487f9085a6f8860f97a8bdbfb67"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fkrauthan/FkrCssURLRewriteBundle/zipball/01b4986d22998487f9085a6f8860f97a8bdbfb67",
+                "reference": "01b4986d22998487f9085a6f8860f97a8bdbfb67",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/assetic-bundle": "*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Fkr\\CssURLRewriteBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Florian Krauthan",
+                    "email": "fkrauthan@gmx.net"
+                }
+            ],
+            "description": "A small assetic filter for symfony to fix all url paths at css documents to correct urls",
+            "homepage": "https://github.com/fkrauthan/FkrCssURLRewriteBundle",
+            "keywords": [
+                "Symfony Bundle",
+                "asset",
+                "assetic",
+                "css",
+                "css url",
+                "cssrewrite",
+                "rewrite"
+            ],
+            "time": "2013-01-04 04:20:50"
+        },
+        {
             "name": "friendsofsymfony/user-bundle",
             "version": "dev-master",
             "source": {
@@ -1089,25 +1137,31 @@
         },
         {
             "name": "knplabs/knp-snappy-bundle",
-            "version": "v1.2",
+            "version": "dev-master",
             "target-dir": "Knp/Bundle/SnappyBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpSnappyBundle.git",
-                "reference": "68f48977816fd829911c789663e22a9a62535079"
+                "reference": "4e5a2cf512782bc665f26d0368735871e7476255"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/68f48977816fd829911c789663e22a9a62535079",
-                "reference": "68f48977816fd829911c789663e22a9a62535079",
+                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/4e5a2cf512782bc665f26d0368735871e7476255",
+                "reference": "4e5a2cf512782bc665f26d0368735871e7476255",
                 "shasum": ""
             },
             "require": {
                 "knplabs/knp-snappy": "*",
                 "php": ">=5.3.2",
+                "symfony/finder": ">=2.0.0",
                 "symfony/framework-bundle": ">=2.0.0"
             },
             "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Knp\\Bundle\\SnappyBundle": ""
@@ -1136,7 +1190,7 @@
                 "pdf",
                 "snappy"
             ],
-            "time": "2014-01-02 11:20:45"
+            "time": "2014-10-26 21:46:18"
         },
         {
             "name": "kriswallsmith/assetic",
