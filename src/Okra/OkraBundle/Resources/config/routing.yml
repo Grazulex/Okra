@@ -8,9 +8,19 @@ okra_table:
     defaults: { _controller: OkraBundle:Default:table }    
     requirements:
             _method:  GET|POST
+okra_tablehistory:
+    path:     /{_locale}/tablehistory/{tableId}
+    defaults: { _controller: OkraBundle:Default:tablehistory }    
+    requirements:
+            _method:  GET|POST
 okra_close:
     path:     /{_locale}/close/{tableId}
     defaults: { _controller: OkraBundle:Default:close }        
+    requirements:
+        _method:  GET|HEAD
+okra_print:
+    path:     /{_locale}/print/{tableId}
+    defaults: { _controller: OkraBundle:Default:print }        
     requirements:
         _method:  GET|HEAD
 okra_statsclose:
@@ -42,7 +52,13 @@ okra_stats:
     path:     /{_locale}/stats/
     defaults: { _controller: OkraBundle:Default:stats }     
     requirements:
-        _method:  GET    
+        _method:  GET
+okra_history:
+    path:     /{_locale}/history/
+    defaults: { _controller: OkraBundle:Default:history }     
+    requirements:
+        _method:  GET
+                
 # app/config/routing.yml
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

@@ -9,6 +9,15 @@ use Okra\OkraBundle\Entity\OrdersItem;
 
 class DefaultController extends Controller
 {
+    public function historyAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository('OkraBundle:Orders');
+        $Orders = $repository->getAllClose();
+
+        return $this->render('OkraBundle:Default:history.html.twig', array("locale"=>$this->get('request')->getLocale(), "orders"=>$Orders));
+    }
+    
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -138,6 +147,18 @@ class DefaultController extends Controller
         
         return $this->render('OkraBundle:Default:table.html.twig', array("order"=>$order, "orderitems"=>$orderItems, "categories"=>$categories, "items"=>$items, 'form' => $form->createView()));        
     }
+
+    public function tablehistoryAction($tableId,Request $request) {        
+        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository('OkraBundle:Orders');
+        $order = $repository->find($tableId);
+                                
+        $repository = $this->getDoctrine()->getRepository('OkraBundle:OrdersItem');
+        $orderItems = $repository->findBy(array('idOrder'=>$tableId));
+        
+        return $this->render('OkraBundle:Default:tablehistory.html.twig', array("order"=>$order, "orderitems"=>$orderItems));        
+    }
+    
     
     public function bookAction(Request $request) {
         $this->saveOther($request, 1);
@@ -193,6 +214,29 @@ class DefaultController extends Controller
             )
         );        
     }
+
+    public function printAction($tableId) {  
+        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository('OkraBundle:Orders');
+        $order = $repository->find($tableId);
+        
+        $repository = $this->getDoctrine()->getRepository('OkraBundle:OrdersItem');
+        $orderItems = $repository->findBy(array('idOrder'=>$tableId));        
+                
+        $html = $this->renderView('OkraBundle:Default:ticket.html.twig', array(
+            'order'  => $order, "orderitems"=>$orderItems
+        ));
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, array('page-size' => 'A5')),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="file.pdf"'
+            )
+        );        
+    }
+    
     
     public function statsAction($printed = false) {       
         $repository= $this->getDoctrine()->getRepository('OkraBundle:Category');

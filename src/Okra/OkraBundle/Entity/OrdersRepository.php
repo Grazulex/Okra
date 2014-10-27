@@ -44,6 +44,19 @@ class OrdersRepository extends EntityRepository
             ->getQuery()
             ->getResult();        
     }
+
+    public function getAllClose()
+    {
+        return $this->createQueryBuilder('o')
+            ->select(array('o.id, o.idTable, o.idOrderManual, u.username, o.dateCreate, o.dateClose, o.total, timediff(o.dateClose, o.dateCreate) as diffhour, datediff(o.dateClose, o.dateCreate) as diffday'))    
+                ->innerJoin('o.idUser','u')
+            ->where('o.idStatus = :Status')
+            ->setParameter('Status', 2)
+            ->orderBy('o.idTable', 'ASC')  
+                ->addOrderBy('o.idOrderManual', 'ASC')                
+            ->getQuery()
+            ->getResult();        
+    }    
     
     public function createNewOrder($session_id)
     {
