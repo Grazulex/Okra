@@ -1,7 +1,8 @@
 imports:
     - { resource: config.yml }
-okra:
-    filter: css_url_rewrite
+twig:
+    globals:
+        filter: css_url_rewrite       
 framework:
     validation:
         cache: ~

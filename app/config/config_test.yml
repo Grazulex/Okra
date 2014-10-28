@@ -1,7 +1,8 @@
 imports:
     - { resource: config_dev.yml }
-okra:
-    filter: cssrewrite
+twig:
+    globals:
+        filter: cssrewrite           
 framework:
     test: ~
     session:
