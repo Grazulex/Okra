@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{% endblock %} - Okra St.-ROCHUS</title>
         {% block stylesheets %}
+            {% if linkfilter == 'prod' %} 
                 {% stylesheets filter='{{ linkfilter }}'
                       'bundles/pinanobootstrap3/css/bootstrap.min.css'
                       'bundles/pinanobootstrap3/css/bootstrap-theme.min.css'
@@ -13,7 +14,17 @@
                       'bundles/okra/css/sb-admin.css'
                     %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
-                    {% endstylesheets %}                            
+                    {% endstylesheets %} 
+                {% else %}
+                    {% stylesheets filter='{{ linkfilter }}'
+                      'bundles/pinanobootstrap3/css/bootstrap.min.css'
+                      'bundles/pinanobootstrap3/css/bootstrap-theme.min.css'
+                      'bundles/okra/css/font-awesome.min.css'
+                      'bundles/okra/css/sb-admin.css'
+                    %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+                    {% endstylesheets %} 
+                {% endif %}        
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block content_header %}
