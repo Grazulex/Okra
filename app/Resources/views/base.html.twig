@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{% endblock %} - Okra St.-ROCHUS</title>
         {% block stylesheets %}
-            {% if linkfilter == 'prod' %} 
-                {% stylesheets filter='{{ linkfilter }}'
+            {% if linkfilter == 'css_url_rewrite' %} 
+                {% stylesheets filter='css_url_rewrite'
                       'bundles/pinanobootstrap3/css/bootstrap.min.css'
                       'bundles/pinanobootstrap3/css/bootstrap-theme.min.css'
                       'bundles/okra/css/font-awesome.min.css'
