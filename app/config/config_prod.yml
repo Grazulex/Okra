@@ -1,8 +1,5 @@
 imports:
-    - { resource: config.yml }
-twig:
-    globals:
-        filter: css_url_rewrite       
+    - { resource: config.yml }  
 framework:
     validation:
         cache: ~

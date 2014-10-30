@@ -1,8 +1,5 @@
 imports:
-    - { resource: config_dev.yml }
-twig:
-    globals:
-        filter: cssrewrite           
+    - { resource: config_dev.yml }         
 framework:
     test: ~
     session:
