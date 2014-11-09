@@ -1,0 +1,56 @@
+Homepage: Homepagina
+Open: Open
+'Open a new tabel': 'Open en nieuw tafel'
+'New table': 'Nieuw tafel'
+Book: Boek
+Bying: Aankoop
+Others: Anders
+Sales: Verkoop
+Total: Totaal
+Order: Besteling
+Resume: Samenvating
+Tabel: Tafel
+'Order ID': 'Besteling nr'
+User: Gebruiker
+'On the order': 'In de besteling'
+Item: Product
+Price: Prijs
+Quantity: Hoeveelheid
+Add: Toevoeg
+'Edit Category': '__Edit Category'
+'Back to the list': '__Back to the list'
+'List Category': '__List Category'
+'#': '__#'
+Name: __Name
+Actions: __Actions
+View: __View
+'Edit FR': '__Edit FR'
+'Edit NL': '__Edit NL'
+'Edit EN': '__Edit EN'
+'Create a new category': '__Create a new category'
+'New Category': '__New Category'
+'View Category': '__View Category'
+'Back to list': '__Back to list'
+Edit: __Edit
+'Close & print': '__Close & print'
+Date: __Date
+'Table number': '__Table number'
+'Order number': '__Order number'
+'Your user': '__Your user'
+'Category Name': '__Category Name'
+'Item Name': '__Item Name'
+'Unit price': '__Unit price'
+'Edit Item': '__Edit Item'
+'List Item': '__List Item'
+'New Item': '__New Item'
+'View Item': '__View Item'
+'New Book': '__New Book'
+'New Bying': '__New Bying'
+'New Others': '__New Others'
+'We thanks you and we hope to see you next year.': 'Dankt U van harte voor uw komst en hoopt dat het U gesmaak heeft.  Tot weerziens!!!'
+days: __days
+Session: __Session
+'Edit Sessions': '__Edit Sessions'
+'List Session': '__List Session'
+'New Session': '__New Session'
+'View Sessions': '__View Sessions'

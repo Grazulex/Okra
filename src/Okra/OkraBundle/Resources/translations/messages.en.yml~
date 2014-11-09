@@ -1,0 +1,56 @@
+'Edit Category': '__Edit Category'
+'Back to the list': '__Back to the list'
+'List Category': '__List Category'
+'#': '__#'
+Name: __Name
+Actions: __Actions
+View: __View
+'Edit FR': '__Edit FR'
+'Edit NL': '__Edit NL'
+'Edit EN': '__Edit EN'
+'Create a new category': '__Create a new category'
+'New Category': '__New Category'
+'View Category': '__View Category'
+'Back to list': '__Back to list'
+Edit: __Edit
+Homepage: __Homepage
+days: __days
+Open: __Open
+Session: __Session
+'Open a new tabel': '__Open a new tabel'
+'New table': '__New table'
+Book: __Book
+'New Book': '__New Book'
+Bying: __Bying
+'New Bying': '__New Bying'
+Others: __Others
+'New Others': '__New Others'
+Sales: __Sales
+Total: __Total
+Item: __Item
+Price: __Price
+Order: __Order
+Resume: __Resume
+Tabel: __Tabel
+'Order ID': '__Order ID'
+User: __User
+'On the order': '__On the order'
+Quantity: __Quantity
+Add: __Add
+'Close & print': '__Close & print'
+Date: __Date
+'Table number': '__Table number'
+'Order number': '__Order number'
+'Your user': '__Your user'
+'Category Name': '__Category Name'
+'Item Name': '__Item Name'
+'Unit price': '__Unit price'
+'We thanks you and we hope to see you next year.': '__We thanks you and we hope to see you next year.'
+'Edit Item': '__Edit Item'
+'List Item': '__List Item'
+'New Item': '__New Item'
+'View Item': '__View Item'
+'Edit Sessions': '__Edit Sessions'
+'List Session': '__List Session'
+'New Session': '__New Session'
+'View Sessions': '__View Sessions'

@@ -33,3 +33,6 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com     
+twig:
+    globals:
+        linkfilter: cssrewrite   

@@ -1,4 +1,4 @@
 twig:
     globals:
-        filter: css_url_rewrite     
+        linkfilter: css_url_rewrite     
         

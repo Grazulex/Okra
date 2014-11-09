@@ -1,0 +1,124 @@
+<?php
+
+namespace Okra\OkraBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Sessions
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Sessions
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_start", type="date")
+     */
+    private $dateStart;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_stop", type="date", nullable=true)
+     */
+    private $dateStop;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", nullable=true)
+     */
+    private $comment;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dateStart
+     *
+     * @param \DateTime $dateStart
+     * @return Sessions
+     */
+    public function setDateStart($dateStart)
+    {
+        $this->dateStart = $dateStart;
+
+        return $this;
+    }
+
+    /**
+     * Get dateStart
+     *
+     * @return \DateTime 
+     */
+    public function getDateStart()
+    {
+        return $this->dateStart;
+    }
+
+    /**
+     * Set dateStop
+     *
+     * @param \DateTime $dateStop
+     * @return Sessions
+     */
+    public function setDateStop($dateStop)
+    {
+        $this->dateStop = $dateStop;
+
+        return $this;
+    }
+
+    /**
+     * Get dateStop
+     *
+     * @return \DateTime 
+     */
+    public function getDateStop()
+    {
+        return $this->dateStop;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     * @return Sessions
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string 
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+}
