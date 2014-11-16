@@ -1,24 +1,24 @@
 Homepage: Homepagina
 Open: Open
-'Open a new tabel': 'Open en nieuw tafel'
-'New table': 'Nieuw tafel'
+'Open a new tabel': 'Nieuwe tafel'
+'New table': 'Nieuwe tafel'
 Book: Boek
 Bying: Aankoop
 Others: Anders
 Sales: Verkoop
 Total: Totaal
-Order: Besteling
-Resume: Samenvating
+Order: Bestelling
+Resume: Samenvatting
 Tabel: Tafel
-'Order ID': 'Besteling nr'
-User: Gebruiker
-'On the order': 'In de besteling'
+'Order ID': 'Bestelnummer'
+User: Opdiener
+'On the order': 'Reeds besteld'
 Item: Product
 Price: Prijs
 Quantity: Hoeveelheid
-Add: Toevoeg
+Add: Toevoegen
 'Edit Category': '__Edit Category'
-'Back to the list': '__Back to the list'
+'Back to the list': 'Terug naar hoofdmenu'
 'List Category': '__List Category'
 '#': '#'
 Name: Naam
@@ -30,16 +30,16 @@ View: __View
 'Create a new category': '__Create a new category'
 'New Category': '__New Category'
 'View Category': '__View Category'
-'Back to list': '__Back to list'
+'Back to list': 'Terug naar hoofdmenu'
 Edit: __Edit
-'Close & print': '__Close & print'
+'Close & print': 'Afsluiten en printen'
 Date: Datum
-'Table number': 'Tafel'
-'Order number': 'Besteling'
-'Your user': 'Kelner'
-'Category Name': 'Categorie'
-'Item Name': 'Produkten'
-'Unit price': 'Prijs'
+'Table number': Tafel
+'Order number': Bestelling
+'Your user': Opdiener
+'Category Name': Categorie
+'Item Name': Producten
+'Unit price': Prijs
 'Edit Item': '__Edit Item'
 'List Item': '__List Item'
 'New Item': '__New Item'
@@ -47,12 +47,14 @@ Date: Datum
 'New Book': '__New Book'
 'New Bying': '__New Bying'
 'New Others': '__New Others'
-'We thanks you and we hope to see you next year.': 'Okra St.-ROCHUS dankt U van harte voor uw komst en hoopt dat het U gesmaak heeft.  Tot weerziens!!!'
+'We thanks you and we hope to see you next year.': 'Okra St.-ROCHUS dankt U van harte voor uw komst en hoopt dat het U gesmaakt heeft.  Tot weerziens!!!'
 days: dagen
-Session: __Session
+Session: Sessie
 'Edit Sessions': '__Edit Sessions'
 'List Session': '__List Session'
 'New Session': '__New Session'
 'View Sessions': '__View Sessions'
 Start: Start
 'Start Cash': 'Start kassa'
+'Back to the homepage': 'Terug naar hoofdmenu'
+Print: Afdrukken

@@ -35,7 +35,7 @@ class OrdersRepository extends EntityRepository
     public function getAllOpen()
     {
         return $this->createQueryBuilder('o')
-            ->select(array('o.id, o.idTable, o.idOrderManual, u.username, o.dateCreate, o.total, timediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffhour, datediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffday'))    
+            ->select(array('o.id, o.idTable, o.name, o.idOrderManual, u.username, o.dateCreate, o.total, timediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffhour, datediff(CURRENT_TIMESTAMP(), o.dateCreate) as diffday'))    
                 ->innerJoin('o.idUser','u')
             ->where('o.idStatus = :Status')
             ->setParameter('Status', 1)
@@ -48,7 +48,7 @@ class OrdersRepository extends EntityRepository
     public function getAllClose()
     {
         return $this->createQueryBuilder('o')
-            ->select(array('o.id, o.idTable, o.idOrderManual, u.username, o.dateCreate, o.dateClose, o.total, timediff(o.dateClose, o.dateCreate) as diffhour, datediff(o.dateClose, o.dateCreate) as diffday'))    
+            ->select(array('o.id, o.idTable, o.name, o.idOrderManual, u.username, o.dateCreate, o.dateClose, o.total, timediff(o.dateClose, o.dateCreate) as diffhour, datediff(o.dateClose, o.dateCreate) as diffday'))    
                 ->innerJoin('o.idUser','u')
             ->where('o.idStatus = :Status')
             ->setParameter('Status', 2)

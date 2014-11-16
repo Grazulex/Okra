@@ -14,24 +14,12 @@
                 <td>
                     <img src="{{ app.request.getSchemeAndHttpHost() ~ asset('bundles/okra/images/logo.jpg'|e) }}" alt=""/>
                 </td>
-                <td>
-                    &nbsp;&nbsp;&nbsp;
+                <td style="color: #000;font-size: 25px;text-align: center;">
+                    {{ order.idTable }}<br/>{{ order.name }}
                 </td>
                 <td style="font-size: 15px;text-align: left;">
-                    {% trans %}Date{% endtrans %} :<br/> 
-                    {% trans %}Table number{% endtrans %} :<br/>
-                    {% trans %}Order number{% endtrans %} :<br/>
-                    {% trans %}Your user{% endtrans %} :<br/> 
-                </td>
-                <td style="font-size: 15px;text-align: right;">
-                    {{ "now"|date("d/m/Y") }}<br/>
-                    {{ order.idTable }}<br/>                     
-                    {% if order.idOrderManual %}
-                        {{ order.idOrderManual }}<br/>
-                    {% else %}
-                        {{ order.id }}<br/>
-                    {% endif %}                    
-                    {{ order.idUser.username }}                    
+                    {% trans %}Date{% endtrans %} : {{ "now"|date("d/m/Y") }}<br/> 
+                    {% trans %}Your user{% endtrans %} : {{ order.idUser.username }}<br/> 
                 </td>
             </tr>
         </table>
@@ -102,12 +90,12 @@
                     <td>
                         
                     </td>
-                    <td style="color: #000;font-size: 20px;border-width:1px;border-style:solid;border-color:#333;text-align: right;">
-                        {{ (order.total) | craue_currency('EUR') }}
+                    <td style="color: #000;font-size: 30px;border-width:1px;border-style:solid;border-color:#333;text-align: right;">
+                        <b>{{ (order.total) | craue_currency('EUR') }}</b>
                     </td>
                 </tr>
             </tfooter>
         </table>
-        <h1>{% trans %}We thanks you and we hope to see you next year.{% endtrans %}</h1>            
+        <h2>{% trans %}We thanks you and we hope to see you next year.{% endtrans %}</h2>            
     </body>
 </html>

@@ -14,8 +14,8 @@
                 <thead>
                     <tr>
                         <th style="text-align: center;"><i class="fa fa-glass"></i></th>
-                        <th style="text-align: center;"><i class="fa fa-shopping-cart"></i></th>                                        
-                        <th style="text-align: center;"><i class="fa fa-user"></i></th>
+                        <th style="text-align: center;"><i class="fa fa-user"></i></th>						
+						<th style="text-align: center;"><i class="fa fa-eye"></i></th>						
                         <th style="text-align: center;"><i class="fa fa-clock-o"></i></th>
                         <th style="text-align: center;"><i class="fa fa-warning"></i></th>
                         <th style="text-align: center;"><i class="fa fa-euro"></i></th>
@@ -61,6 +61,9 @@
                       
                       {{ form_label(form.idOrderManual) }}
                       {{ form_widget(form.idOrderManual) }}
+					  
+                      {{ form_label(form.name) }}
+                      {{ form_widget(form.name) }}					  
                       
                       {{ form_label(form.idUser) }}
                       {{ form_widget(form.idUser) }}

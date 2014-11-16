@@ -22,6 +22,7 @@
                 {% else %}
                     {{ order.id }}
                 {% endif %}
+			/ {% trans %}Klant{% endtrans %} : {{ order.name}}	
             / {% trans %}Total{% endtrans %} : {{ order.total | craue_currency('EUR')}}    
             / {% trans %}User{% endtrans %} : {{ order.idUser.username}}
             </div>

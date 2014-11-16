@@ -34,6 +34,13 @@ class Orders
      * @ORM\Column(name="id_order_manual", type="integer", nullable=true)
      */
     private $idOrderManual;
+	
+    /**
+     * @var string
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+	
 
     /**
      * @ORM\ManyToOne(targetEntity="Sessions")
@@ -43,7 +50,7 @@ class Orders
     
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id", nullable=true)
      */    
     private $idUser;
 
@@ -272,4 +279,27 @@ class Orders
     {
         return $this->dateClose;
     }
+	
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Item
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }	
 }

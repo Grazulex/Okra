@@ -13,7 +13,7 @@ class ItemRepository extends EntityRepository
         $qb->select('a')
             ->where('a.idCategory = :Category')
             ->setParameter('Category', $category)
-            ->orderBy('a.name');         
+            ->orderBy('a.id');         
 
         // Use Translation Walker
         $query = $qb->getQuery();

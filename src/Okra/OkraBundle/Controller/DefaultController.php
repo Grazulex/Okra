@@ -34,7 +34,8 @@ class DefaultController extends Controller
             ->setMethod('post')
             ->add('idTable', 'integer',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Table'))
             ->add('idOrderManual', 'integer',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Order','required'  => false))
-            ->add('idUser', 'entity', array('attr'=> array('class'=>'form-control input-lg'),   'class' => 'OkraBundle:User', 'property' => 'username','label'  => 'User'))
+			->add('name', 'text',array('attr'=> array('class'=>'form-control input-lg'),'label'  => 'Naam klant','required'  => false))
+            ->add('idUser', 'entity', array('attr'=> array('class'=>'form-control input-lg'),   'class' => 'OkraBundle:User', 'property' => 'username','label'  => 'User','required'  => false))
             ->add('save', 'submit', array('attr'=> array('class'=>'btn btn-primary'), 'label' => 'Create table'))
             ->add('button', 'button', array('attr'=> array('class'=>'btn btn-default', 'data-dismiss' => 'modal'), 'label' => 'Cancel'))    
             ->getForm();

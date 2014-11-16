@@ -1,26 +1,25 @@
 {% for order in orders %}
         <tr>
-            <td style="text-align: center;">{{ order.idTable }}</td>
-            <td style="text-align: center;">
-                {% if order.idOrderManual %}
-                    {{ order.idOrderManual }}
-                {% else %}
-                    {{ order.id }}
-                {% endif %}
-            </td>                                        
-            <td style="text-align: center;">{{ order.dateCreate | craue_time }} - {{ order.dateClose | craue_time }}
+            <td style="text-align: center;">{{ order.idTable }}</td>                                     
+            <td style="text-align: center;">{{ order.username }}</td>
+			<td style="text-align: center;">{{ order.name }}</td>
+            <td style="text-align: center;">{{ order.dateCreate | craue_time }} 
                 <span class="badge">
                     {% if order.diffday == 0 %}                                            
                         {{ order.diffhour | craue_time }}
                     {% else %} 
                         {{ order.diffday }} {% trans %}days{% endtrans %}
                     {% endif %} 
-                </span>            
+                </span>
+            </td>    
+            <td style="text-align: center;">
+                <div class="progress">
+                    {% include 'OkraBundle:Default:indexorderhour.html.twig'%} 
+                </div>
             </td>
-            <td style="text-align: center;">{{ order.username }}</td>
             <td style="text-align: right;">{{ order.total | craue_currency('EUR') }}</td>
             <td style="text-align: center;">
-                <a href="{{ path('okra_tablehistory', {'tableId': order.id}) }}">
+                <a href="{{ path('okra_table', {'tableId': order.id}) }}">
                     <button type="button" class="btn btn-xs btn-success">                                            
                         {% trans %}Open{% endtrans %}
                     </button>
